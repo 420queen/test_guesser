@@ -98,4 +98,11 @@
     img.addEventListener('pointerup', pointerUp);
     img.addEventListener('pointercancel', pointerUp);
     img.addEventListener('pointerleave', pointerUp);
+
+    img.addEventListener('load', function(){
+        scale = 1;
+        tx = 0;
+        ty = 0;
+        apply();
+    });
 })();
