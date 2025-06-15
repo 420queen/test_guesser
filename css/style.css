@@ -18,8 +18,8 @@ button, .btn {
 }
 
 #miniMap {
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 500px;
     position: absolute;
     top: 50%;
     right: 20px;
