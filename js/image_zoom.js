@@ -16,8 +16,6 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-
-
         const minX = containerWidth * (1 - scale) / scale;
         const maxX = 0;
         const minY = containerHeight * (1 - scale) / scale;
