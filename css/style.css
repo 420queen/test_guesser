@@ -112,6 +112,13 @@ button, .btn {
     height: 100vh;
     object-fit: cover;
     z-index: 1;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+#image.grabbing {
+    cursor: grabbing;
 }
 
 #scoreBoard {
