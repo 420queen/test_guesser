@@ -24,12 +24,6 @@ $(document).ready(function() {
     // Init Timer
     resetTimer();
 
-    var mode = document.getElementById("mode");
-    mode.onchange = function() {
-        var value = mode.options[mode.selectedIndex].value;
-        console.log(value);
-        document.location.search = value;
-    }
 
     // Timer
     function timer() {
@@ -183,7 +177,7 @@ $(document).ready(function() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2><a href="'+window.locID+'">'+window.locName+'</a>' + (window.locDescription ? ', '+window.locDescription : '' ) + '.</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
         };
 
@@ -208,55 +202,23 @@ $(document).ready(function() {
     }
 
     function svinitialize() {
-        var params = window.location.search.substr(1);
-        if (params && params.match(/^Q\d+$/)) {
-            var restriction = "?item wdt:P31 wd:"+params+".";
-        } else {
-            var restriction = "";
-        }
-
-        const query = `
-        SELECT ?item ?itemLabel ?itemDescription ?lat ?lon ?photo WHERE { 
-            { 
-                SELECT ?item ?photo ?lat ?lon 
-                WHERE { 
-                    ?item wdt:P18 ?photo .  
-                        ?item p:P625 ?statement . 
-                        ?statement psv:P625 ?coords . 
-                        ?coords wikibase:geoLatitude ?lat . 
-                        ?coords wikibase:geoLongitude ?lon . 
-                        ${restriction} 
-                } LIMIT 1000
-            } 
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "en,de". } 
-        } 
-        `;
-        const url = `https://query.wikidata.org/bigdata/namespace/wdq/sparql?format=json&query=${query}`;
-            window.fetch(url)
-            .then(
-                function (response) {
-                    if (response.status !== 200) {
-                        console.warn(`Looks like there was a problem. Status Code: ${response.status}`);
-                        return;
-                    }
-                    response.json().then(function (data) {
-                        var i = Math.floor(Math.random()*data.results.bindings.length)
-                        var place = data.results.bindings[i];
-
-                        var img = document.getElementById('image');
-                        img.src = place.photo.value;
-                        window.actualLatLng = {lat: place.lat.value, lon: place.lon.value};
-                        window.locID = place.item.value;
-                        window.locName = place.itemLabel.value;
-                        if (place.itemDescription) {
-                            window.locDescription = place.itemDescription.value;
-                        } else {
-                            window.locDescription = undefined;
-                        }
-                    });
+        window.fetch('locations.json')
+            .then(function(response) {
+                if (response.status !== 200) {
+                    console.warn(`Looks like there was a problem. Status Code: ${response.status}`);
+                    return;
                 }
-            )
-            .catch(function (err) {
+                response.json().then(function(data) {
+                    var i = Math.floor(Math.random() * data.length);
+                    var place = data[i];
+
+                    var img = document.getElementById('image');
+                    img.src = place.image;
+                    window.actualLatLng = {lat: place.lat, lon: place.lon};
+                    window.locName = place.label;
+                });
+            })
+            .catch(function(err) {
                 console.warn('Fetch Error :-S', err);
             });
     };
