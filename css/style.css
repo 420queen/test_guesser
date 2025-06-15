@@ -9,6 +9,7 @@ button, .btn {
     border-radius: 0;
     border: none;
     box-shadow: none;
+    background-image: none;
     color: white;
 }
 
@@ -17,18 +18,22 @@ button, .btn {
     height: 100%;
 }
 
-#miniMap {
+#miniMapWrapper {
     width: 25vw;              /* 45% of screen width */
-    height: 15vh;             /* 50% of screen height */
     position: absolute;
     top: 50%;
     right: 5vw;               /* 5% from right edge */
     transform: translateY(-50%);
     z-index: 1000;
-    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
     max-width: 700px;         /* Don't exceed original size */
-    max-height: 500px;
     min-width: 300px;         /* Still usable on mobile */
+}
+
+#miniMap {
+    width: 100%;
+    height: 15vh;             /* 50% of screen height */
+    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+    max-height: 500px;
     min-height: 200px;
 }
 
@@ -50,17 +55,15 @@ button, .btn {
     font-size: 24px;
     font-weight: bold;
     color: white;
-    width: 460px;
+    width: 100%;
     cursor: pointer;
     text-align: center;
-    position: absolute;
-    top: 340px;
-    right: 20px;
-    z-index: 1000;
     background-color: rgb(238, 0, 0);
     border-radius: 0;
     border: none;
     box-shadow: none;
+    background-image: none;
+    padding: 10px 0;
 }
 
 #guessButton:hover {
@@ -155,13 +158,16 @@ select {
     #image {
         height: 50vh;
     }
-    #miniMap {
+    #miniMapWrapper {
         width: 100%;
-        height: 50vh;
         bottom: 0;
         right: 0;
         left: 0;
         top: auto;
         transform: none;
+    }
+    #miniMap {
+        width: 100%;
+        height: 50vh;
     }
 }
