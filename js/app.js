@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function startGame() {
     //
     // Setup
     //
@@ -222,4 +222,12 @@ $(document).ready(function() {
                 console.warn('Fetch Error :-S', err);
             });
     };
+}
+
+$(document).ready(function(){
+    $('#startButton').on('click', function(){
+        $('#welcomeScreen').fadeOut(500, function(){
+            startGame();
+        });
+    });
 });
