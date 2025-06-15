@@ -18,14 +18,18 @@ button, .btn {
 }
 
 #miniMap {
-    width: 700px;
-    height: 500px;
+    width: 45vw;              /* 45% of screen width */
+    height: 50vh;             /* 50% of screen height */
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 5vw;               /* 5% from right edge */
     transform: translateY(-50%);
     z-index: 1000;
     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+    max-width: 700px;         /* Don't exceed original size */
+    max-height: 500px;
+    min-width: 300px;         /* Still usable on mobile */
+    min-height: 200px;
 }
 
 #timer {
