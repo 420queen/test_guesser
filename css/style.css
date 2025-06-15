@@ -119,6 +119,7 @@ button, .btn {
 
 #image.grabbing {
     cursor: grabbing;
+    touch-action: none;
 }
 
 #scoreBoard {
