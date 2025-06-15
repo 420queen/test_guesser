@@ -151,7 +151,8 @@ button, .btn {
         width: auto;
         height: auto;
         padding: 5px 10px;
-        display: flex;
+        display: inline-flex; /* size to content so box remains narrow */
+        flex-wrap: nowrap;
         gap: 10px;
         white-space: nowrap;
         align-items: center;
