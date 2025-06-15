@@ -18,8 +18,8 @@ button, .btn {
 }
 
 #miniMap {
-    width: 45vw;              /* 45% of screen width */
-    height: 50vh;             /* 50% of screen height */
+    width: 25vw;              /* 45% of screen width */
+    height: 15vh;             /* 50% of screen height */
     position: absolute;
     top: 50%;
     right: 5vw;               /* 5% from right edge */
