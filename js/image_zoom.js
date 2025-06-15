@@ -1,4 +1,4 @@
-(function(){
+(function () {
     const img = document.getElementById('image');
     if (!img) return;
 
@@ -13,15 +13,15 @@
 
     function clamp() {
         const container = img.parentElement;
-        const cw = container.clientWidth;
-        const ch = container.clientHeight;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
 
-        const sw = img.naturalWidth * scale;
-        const sh = img.naturalHeight * scale;
+        const imageWidth = img.naturalWidth * scale;
+        const imageHeight = img.naturalHeight * scale;
 
-        const minX = Math.min(0, cw - sw);
-        const minY = Math.min(0, ch - sh);
+        const minX = Math.min(0, containerWidth - imageWidth);
         const maxX = 0;
+        const minY = Math.min(0, containerHeight - imageHeight);
         const maxY = 0;
 
         tx = Math.min(Math.max(tx, minX), maxX);
@@ -49,7 +49,6 @@
     function pointerDown(e) {
         pointers.set(e.pointerId, e);
         img.classList.add('grabbing');
-
         if (pointers.size === 1) {
             start.x = e.clientX - tx;
             start.y = e.clientY - ty;
@@ -58,17 +57,15 @@
             start.dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
             start.mid = {
                 x: (a.clientX + b.clientX) / 2,
-                y: (a.clientY + b.clientY) / 2
+                y: (a.clientY + b.clientY) / 2,
             };
         }
-
         img.setPointerCapture(e.pointerId);
     }
 
     function pointerMove(e) {
         if (!pointers.has(e.pointerId)) return;
         pointers.set(e.pointerId, e);
-
         if (pointers.size === 1) {
             e.preventDefault();
             tx = e.clientX - start.x;
@@ -81,7 +78,7 @@
             const factor = dist / start.dist;
             const mid = {
                 x: (a.clientX + b.clientX) / 2,
-                y: (a.clientY + b.clientY) / 2
+                y: (a.clientY + b.clientY) / 2,
             };
             const prev = scale;
             scale = Math.min(Math.max(scale * factor, minScale), maxScale);
@@ -99,7 +96,6 @@
         if (!pointers.has(e.pointerId)) return;
         pointers.delete(e.pointerId);
         img.releasePointerCapture(e.pointerId);
-
         if (pointers.size === 0) {
             img.classList.remove('grabbing');
         } else if (pointers.size === 1) {
@@ -116,7 +112,7 @@
     img.addEventListener('pointercancel', pointerUp);
     img.addEventListener('pointerleave', pointerUp);
 
-    img.addEventListener('load', function() {
+    img.addEventListener('load', function () {
         scale = 1;
         tx = 0;
         ty = 0;
