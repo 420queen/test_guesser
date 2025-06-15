@@ -15,16 +15,20 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 40px;              /* keep space below button */
+    box-sizing: border-box;
     z-index: 2000;
     animation: fadeIn 1s, gradientPulse 6s ease-in-out infinite;
 }
 
 #welcomeScreen img {
     max-width: 80%;
+    max-height: calc(100vh - 160px);   /* leave room for the button */
 }
 
 #welcomeScreen button {
     margin-top: 20px;
+    margin-bottom: 20px;               /* padding under the button */
 }
 
 @keyframes fadeIn {
