@@ -9,7 +9,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;                      /* ensure full viewport height on mobile */
     background: radial-gradient(circle, white 0%, rgb(151,231,238) 100%);
     display: flex;
     flex-direction: column;
@@ -23,12 +23,14 @@ html, body {
 
 #welcomeScreen img {
     max-width: 80%;
-    max-height: calc(100vh - 160px);   /* leave room for the button */
+    max-height: calc(100dvh - 200px);  /* keep image from hiding the button */
 }
 
 #welcomeScreen button {
     margin-top: 20px;
-    margin-bottom: 20px;               /* padding under the button */
+    margin-bottom: 40px;               /* padding under the button */
+    font-size: 24px;                   /* bigger button text */
+    padding: 12px 32px;
 }
 
 @keyframes fadeIn {
@@ -146,13 +148,19 @@ button, .btn {
         bottom: auto;
         right: auto;
         transform: translateX(-50%);
-        width: 160px;
+        width: auto;
         height: auto;
-        padding: 5px;
-        text-align: center;
+        padding: 5px 10px;
+        display: flex;
+        gap: 10px;
+        white-space: nowrap;
+        align-items: center;
     }
     #scoreBoard .roundScore,
     #scoreBoard a {
+        display: none;
+    }
+    #scoreBoard br {
         display: none;
     }
 }
