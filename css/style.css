@@ -134,6 +134,25 @@ button, .btn {
     z-index: 1000;
 }
 
+@media (max-width: 767px) {
+    #scoreBoard {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        bottom: auto;
+        right: auto;
+        transform: translateX(-50%);
+        width: 160px;
+        height: auto;
+        padding: 5px;
+        text-align: center;
+    }
+    #scoreBoard .roundScore,
+    #scoreBoard a {
+        display: none;
+    }
+}
+
 select {
     width: 200px;
 }
