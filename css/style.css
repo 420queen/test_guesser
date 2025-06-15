@@ -11,7 +11,7 @@ html, body {
 
 #miniMap {
     width: 500px;
-    height: fill;
+    height: 50vh;
     position: absolute;
     top: 20px;
     right: 20px;
