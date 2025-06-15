@@ -1,106 +1,201 @@
-html, body {
-     width: 100%;
-     height: 100%;
--    background: black;
-+    margin: 0;
-+    background: white;
-+}
-+
-+#welcomeScreen {
-+    position: fixed;
-+    top: 0;
-+    left: 0;
-+    width: 100vw;
-+    height: 100vh;
-+    background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 100%);
-+    display: flex;
-+    flex-direction: column;
-+    justify-content: center;
-+    align-items: center;
-+    z-index: 2000;
-+    animation: fadeIn 1s, gradientPulse 5s ease-in-out infinite alternate;
-+}
-+
-+#welcomeScreen img {
-+    max-height: 80vh;
-+    width: auto;
-+    object-fit: contain;
-+}
-+
-+#welcomeScreen button {
-+    margin-top: 20px;
-+}
-+
-+@keyframes fadeIn {
-+    from { opacity: 0; }
-+    to { opacity: 1; }
-+}
-+
-+@keyframes gradientPulse {
-+    0% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 70%); }
-+    50% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 90%); }
-+    100% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 70%); }
- }
- 
- button, .btn {
-     background-color: rgb(238, 0, 0);
-     border-radius: 0;
-     border: none;
-     box-shadow: none;
-     background-image: none;
-     color: white;
- }
- 
- #content {
-     width: 100%;
-     height: 100%;
- }
- 
- #miniMapWrapper {
--    width: 25vw;              /* 45% of screen width */
-+    width: 30vw;              /* increased size for large screens */
-     position: absolute;
-     top: 50%;
-     right: 5vw;               /* 5% from right edge */
-     transform: translateY(-50%);
-     z-index: 1000;
--    max-width: 700px;         /* Don't exceed original size */
--    min-width: 300px;         /* Still usable on mobile */
-+    max-width: 840px;         /* accommodate larger display */
-+    min-width: 360px;         /* Still usable on mobile */
- }
- 
- #miniMap {
-     width: 100%;
--    height: 15vh;             /* 50% of screen height */
-+    height: 18vh;             /* slightly taller on large screens */
-     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
--    max-height: 500px;
--    min-height: 200px;
-+    max-height: 600px;
-+    min-height: 240px;
- }
- 
- #timer {
-     font-size: 90px;
-     line-height: 200px;
-     text-align: center;
-     width: 500px;
-     height: 200px;
-     background: green;
-     position: absolute;
-     top: 390px;
-     right: 20px;
-     z-index: 1000;
-     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
- }
- 
- #guessButton {
-     font-size: 24px;
-     font-weight: bold;
-     color: white;
-     width: 100%;
-     cursor: pointer;
-     text-align: center;
-     background-color: rgb(238, 0, 0);
-     border-radius: 0;
+html, body {Add commentMore actions
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+#welcomeScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 1s;
+}
+
+#welcomeScreen img {
+    max-width: 80%;
+}
+
+#welcomeScreen button {
+    margin-top: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+button, .btn {
+    background-color: rgb(238, 0, 0);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    color: white;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+}
+
+#miniMapWrapper {
+    width: 35vw;              /* increased size for large screens */
+    position: absolute;
+    top: 50%;
+    right: 5vw;               /* 5% from right edge */
+    transform: translateY(-50%);
+    z-index: 1000;
+    max-width: 840px;         /* accommodate larger display */
+    min-width: 360px;         /* Still usable on mobile */
+}
+
+#miniMap {
+    width: 100%;
+    height: 25vh;             /* slightly taller on large screens */
+    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+    max-height: 600px;
+    min-height: 240px;
+}
+
+#timer {
+    font-size: 90px;
+    line-height: 200px;
+    text-align: center;
+    width: 500px;
+    height: 200px;
+    background: green;
+    position: absolute;
+    top: 390px;
+    right: 20px;
+    z-index: 1000;
+    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+}
+
+#guessButton {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    background-color: rgb(238, 0, 0);
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    padding: 10px 0;
+}
+
+#guessButton:hover {
+    background: rgb(238, 0, 0);
+}
+
+#image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+}
+
+#scoreBoard {
+    position: absolute;
+    bottom: 45px;
+    left: 20px;
+    width: 200px;
+    height: 110px;
+    padding: 10px;
+    background: white;
+    box-shadow: 0px 0px 20px rgba(0,0,0, 0.9);
+    z-index: 1000;
+}
+
+select {
+    width: 200px;
+}
+
+#scoreBoard .round {
+}
+
+#scoreboard .totalScore {
+}
+
+#roundEnd {
+    position: absolute;
+    left: 50%;
+    width: 400px;
+    margin: 40px 0 0 -200px;
+    padding: 20px;
+    background: white;
+    text-align: center;
+    display: none;
+    z-index: 1005;
+    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+}
+
+#roundEnd #roundMap {
+    width: 400px;
+    height: 300px;
+    margin: 20px 0;
+}
+
+#roundEnd .closeBtn {
+    cursor: pointer;
+}
+
+#roundMap {
+    width: 500px;
+    height: 500px;
+    position: relative;
+}
+
+#endGame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    margin: -190px 0 0 -240px;
+    padding: 20px;
+    background: #EFEFEF;
+    text-align: center;
+    display: none;
+    z-index: 1000;
+}
+
+/* Change cursor when mousing over clickable layer */
+.leaflet-clickable {
+  cursor: default !important;
+}
+
+/* Change cursor when over entire map */
+.leaflet-container {
+    cursor: default !important;
+}
+
+@media (max-width: 767px) {
+    #image {
+        height: 50vh;
+    }
+    #miniMapWrapper {
+        width: 100%;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: auto;
+        transform: none;
+    }
+    #miniMap {Add commentMore actions
+        width: 100%;
+        height: 50vh;
+    }
+}
