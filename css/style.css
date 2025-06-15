@@ -10,17 +10,19 @@ html, body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: black;
+    background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    animation: fadeIn 1s;
+    animation: fadeIn 1s, gradientPulse 5s ease-in-out infinite alternate;
 }
 
 #welcomeScreen img {
-    max-width: 80%;
+    max-height: 80vh;
+    width: auto;
+    object-fit: contain;
 }
 
 #welcomeScreen button {
@@ -30,6 +32,12 @@ html, body {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes gradientPulse {
+    0% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 70%); }
+    50% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 90%); }
+    100% { background: radial-gradient(circle, white 0%, rgb(151, 231, 238) 70%); }
 }
 
 button, .btn {
