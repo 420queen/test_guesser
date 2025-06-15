@@ -24,7 +24,10 @@ html, body {
 }
 
 #welcomeScreen button {
-    margin-top: 20px;
+    position: absolute;
+    bottom: 10px;
+    font-size: 24px;
+    padding: 15px 30px;
 }
 
 @keyframes fadeIn {
@@ -134,6 +137,10 @@ button, .btn {
     z-index: 1000;
 }
 
+#scoreBoardMobile {
+    display: none;
+}
+
 select {
     width: 200px;
 }
@@ -217,6 +224,34 @@ select {
     #miniMap {
         width: 100%;
         height: calc(100% - 40px);
+    }
+
+    #roundEnd {
+        width: 90vw;
+        left: 5vw;
+        margin-left: 0;
+    }
+
+    #scoreBoard {
+        display: none;
+    }
+
+    #scoreBoardMobile {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 5px;
+        justify-content: space-around;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        font-size: 12px;
+        z-index: 1000;
+    }
+
+    #scoreBoardMobile span {
+        margin: 0 2px;
     }
 
     /* smaller guess button on small screens */

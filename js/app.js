@@ -63,6 +63,10 @@ function startGame() {
             $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
             $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
 
+            $('#scoreBoardMobile .round').html('R: <b>'+round+'/5</b>');
+            $('#scoreBoardMobile .roundScore').html('L: <b>'+roundScore+'</b>');
+            $('#scoreBoardMobile .totalScore').html('T: <b>'+totalScore+'</b>');
+
             var img = document.getElementById('image');
             img.src = "";
 
@@ -191,7 +195,7 @@ function startGame() {
         roundScore = points;
         totalScore = totalScore + points;
 
-        $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
+        $('#miniMap, #pano, #guessButton, #scoreBoard, #scoreBoardMobile').hide();
         $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
         $('#endGame').fadeIn(500);
 
