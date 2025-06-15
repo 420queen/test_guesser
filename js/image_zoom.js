@@ -16,12 +16,11 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        const imageWidth = img.naturalWidth * scale;
-        const imageHeight = img.naturalHeight * scale;
 
-        const minX = Math.min(0, containerWidth - imageWidth);
+
+        const minX = containerWidth * (1 - scale) / scale;
         const maxX = 0;
-        const minY = Math.min(0, containerHeight - imageHeight);
+        const minY = containerHeight * (1 - scale) / scale;
         const maxY = 0;
 
         tx = Math.min(Math.max(tx, minX), maxX);
