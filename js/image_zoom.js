@@ -1,6 +1,6 @@
 (function(){
     const img = document.getElementById('image');
-    if(!img) return;
+    if (!img) return;
 
     let scale = 1;
     const minScale = 1;
@@ -11,26 +11,29 @@
     const pointers = new Map();
     const start = {};
 
-    function clamp(){
-        // Use the element's client dimensions so the calculation isn't
-        // affected by any existing transforms. This prevents the image from
-        // being panned or zoomed outside its container.
-        const cw = img.clientWidth;
-        const ch = img.clientHeight;
-        const sw = cw * scale;
-        const sh = ch * scale;
+    function clamp() {
+        const container = img.parentElement;
+        const cw = container.clientWidth;
+        const ch = container.clientHeight;
+
+        const sw = img.naturalWidth * scale;
+        const sh = img.naturalHeight * scale;
+
         const minX = Math.min(0, cw - sw);
         const minY = Math.min(0, ch - sh);
-        tx = Math.min(Math.max(tx, minX), 0);
-        ty = Math.min(Math.max(ty, minY), 0);
+        const maxX = 0;
+        const maxY = 0;
+
+        tx = Math.min(Math.max(tx, minX), maxX);
+        ty = Math.min(Math.max(ty, minY), maxY);
     }
 
-    function apply(){
+    function apply() {
         clamp();
         img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
     }
 
-    function onWheel(e){
+    function onWheel(e) {
         e.preventDefault();
         const rect = img.getBoundingClientRect();
         const ox = e.clientX - rect.left;
@@ -43,34 +46,43 @@
         apply();
     }
 
-    function pointerDown(e){
+    function pointerDown(e) {
         pointers.set(e.pointerId, e);
         img.classList.add('grabbing');
-        if(pointers.size === 1){
+
+        if (pointers.size === 1) {
             start.x = e.clientX - tx;
             start.y = e.clientY - ty;
-        } else if(pointers.size === 2){
+        } else if (pointers.size === 2) {
             const [a, b] = Array.from(pointers.values());
             start.dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-            start.mid = {x:(a.clientX + b.clientX)/2, y:(a.clientY + b.clientY)/2};
+            start.mid = {
+                x: (a.clientX + b.clientX) / 2,
+                y: (a.clientY + b.clientY) / 2
+            };
         }
+
         img.setPointerCapture(e.pointerId);
     }
 
-    function pointerMove(e){
-        if(!pointers.has(e.pointerId)) return;
+    function pointerMove(e) {
+        if (!pointers.has(e.pointerId)) return;
         pointers.set(e.pointerId, e);
-        if(pointers.size === 1){
+
+        if (pointers.size === 1) {
             e.preventDefault();
             tx = e.clientX - start.x;
             ty = e.clientY - start.y;
             apply();
-        } else if(pointers.size === 2){
+        } else if (pointers.size === 2) {
             e.preventDefault();
             const [a, b] = Array.from(pointers.values());
             const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
             const factor = dist / start.dist;
-            const mid = {x:(a.clientX + b.clientX)/2, y:(a.clientY + b.clientY)/2};
+            const mid = {
+                x: (a.clientX + b.clientX) / 2,
+                y: (a.clientY + b.clientY) / 2
+            };
             const prev = scale;
             scale = Math.min(Math.max(scale * factor, minScale), maxScale);
             tx += mid.x - start.mid.x;
@@ -83,27 +95,28 @@
         }
     }
 
-    function pointerUp(e){
-        if(!pointers.has(e.pointerId)) return;
+    function pointerUp(e) {
+        if (!pointers.has(e.pointerId)) return;
         pointers.delete(e.pointerId);
         img.releasePointerCapture(e.pointerId);
-        if(pointers.size === 0){
+
+        if (pointers.size === 0) {
             img.classList.remove('grabbing');
-        } else if(pointers.size === 1){
+        } else if (pointers.size === 1) {
             const p = Array.from(pointers.values())[0];
             start.x = p.clientX - tx;
             start.y = p.clientY - ty;
         }
     }
 
-    img.addEventListener('wheel', onWheel, {passive: false});
+    img.addEventListener('wheel', onWheel, { passive: false });
     img.addEventListener('pointerdown', pointerDown);
     img.addEventListener('pointermove', pointerMove);
     img.addEventListener('pointerup', pointerUp);
     img.addEventListener('pointercancel', pointerUp);
     img.addEventListener('pointerleave', pointerUp);
 
-    img.addEventListener('load', function(){
+    img.addEventListener('load', function() {
         scale = 1;
         tx = 0;
         ty = 0;
