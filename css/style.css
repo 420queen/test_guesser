@@ -10,11 +10,12 @@ html, body {
 }
 
 #miniMap {
-    width: 500px;
-    height: 300px;
+    width: 100%;
+    height: 50vh;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
 }
@@ -36,7 +37,6 @@ html, body {
 #guessButton {
     font-size: 24px;
     font-weight: bold;
-    color: white;
     width: 460px;
     cursor: pointer;
     text-align: center;
@@ -46,14 +46,13 @@ html, body {
     z-index: 1000;
 }
 
-#guessButton:hover {
-    background: #FF6666;
-}
 
 #image {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
     z-index: 999;
+    display: block;
 }
 
 #scoreBoard {
@@ -101,6 +100,20 @@ select {
     cursor: pointer;
 }
 
+.flat-btn {
+    background: #eee;
+    color: red;
+    border: none;
+    border-radius: 0;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.flat-btn:hover {
+    background: #ddd;
+}
+
 #roundMap {
     width: 500px;
     height: 500px;
@@ -128,4 +141,20 @@ select {
 /* Change cursor when over entire map */
 .leaflet-container {
     cursor: default !important;
+}
+
+@media (min-width: 768px) {
+    #miniMap {
+        width: 500px;
+        height: 300px;
+        bottom: auto;
+        top: 50%;
+        right: 20px;
+        left: auto;
+        transform: translateY(-50%);
+    }
+
+    #image {
+        height: 100%;
+    }
 }

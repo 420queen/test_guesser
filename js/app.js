@@ -157,7 +157,7 @@ $(document).ready(function() {
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if(typeof distance === 'undefined' || ranOut == true){
-            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="flat-btn closeBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
 
             // Stop Counter
@@ -177,7 +177,7 @@ $(document).ready(function() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="flat-btn closeBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
         };
 
@@ -192,7 +192,7 @@ $(document).ready(function() {
         totalScore = totalScore + points;
 
         $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-        $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
+        $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/><button class="flat-btn playAgain" type="button">Play Again?</button>');
         $('#endGame').fadeIn(500);
 
         //rminitialize();
