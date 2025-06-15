@@ -114,6 +114,7 @@ button, .btn {
     z-index: 1;
     cursor: grab;
     user-select: none;
+    touch-action: none;
 }
 
 #image.grabbing {
