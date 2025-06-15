@@ -12,11 +12,12 @@
     const start = {};
 
     function clamp(){
-        const rect = img.getBoundingClientRect();
-        const sw = rect.width * scale;
-        const sh = rect.height * scale;
-        const minX = Math.min(0, rect.width - sw);
-        const minY = Math.min(0, rect.height - sh);
+        const baseW = img.clientWidth;
+        const baseH = img.clientHeight;
+        const sw = baseW * scale;
+        const sh = baseH * scale;
+        const minX = Math.min(0, baseW - sw);
+        const minY = Math.min(0, baseH - sh);
         tx = Math.min(Math.max(tx, minX), 0);
         ty = Math.min(Math.max(ty, minY), 0);
     }
