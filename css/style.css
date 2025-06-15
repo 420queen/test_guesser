@@ -25,6 +25,22 @@ html, body {
 
 #welcomeScreen button {
     margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+    #welcomeScreen button {
+        margin-top: 40px;
+        font-size: 1.6rem;
+        padding: 15px 30px;
+    }
+}
+
+@media (min-width: 992px) {
+    #welcomeScreen button {
+        margin-bottom: 10vh;
+    }
 }
 
 @keyframes fadeIn {
