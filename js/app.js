@@ -185,7 +185,12 @@ function startGame() {
             setTimeout(function(){
                 $('#roundEnd').css({display: 'block', opacity: 0});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').height(h).animate({opacity: 1}, 200);
+                $('#roundEnd').height(h).animate({opacity: 1}, 200, function(){
+                    if (typeof roundmap !== 'undefined') {
+                        roundmap.invalidateSize();
+                        roundmap.fitBounds(L.latLngBounds(guess.getLatLng(), actual.getLatLng()), {padding: [50, 50]});
+                    }
+                });
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
@@ -217,7 +222,12 @@ function startGame() {
             setTimeout(function(){
                 $('#roundEnd').css({display: 'block', opacity: 0});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').height(h).animate({opacity: 1}, 200);
+                $('#roundEnd').height(h).animate({opacity: 1}, 200, function(){
+                    if (typeof roundmap !== 'undefined') {
+                        roundmap.invalidateSize();
+                        roundmap.fitBounds(L.latLngBounds(guess.getLatLng(), actual.getLatLng()), {padding: [50, 50]});
+                    }
+                });
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
