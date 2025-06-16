@@ -11,20 +11,27 @@ function startGame() {
     var distance;
     var detailPic = '';
     var explainerText = '';
+    var locationsPool = [];
 
     //
-    //  Init maps
+    //  Init maps and load locations
     //
 
-    svinitialize();
-    mminitialize();
+    window.fetch('locations.json')
+        .then(function(response){ return response.json(); })
+        .then(function(data){
+            locationsPool = shuffleArray(data).slice(0,5);
+            svinitialize();
+            mminitialize();
+            resetTimer();
+        })
+        .catch(function(err){
+            console.warn('Fetch Error :-S', err);
+        });
 
     //
     // Scoreboard & Guess button event
     //
-
-    // Init Timer
-    resetTimer();
 
 
     // Timer
@@ -235,28 +242,29 @@ function startGame() {
     }
 
     function svinitialize() {
-        window.fetch('locations.json')
-            .then(function(response) {
-                if (response.status !== 200) {
-                    console.warn(`Looks like there was a problem. Status Code: ${response.status}`);
-                    return;
-                }
-                response.json().then(function(data) {
-                    var i = Math.floor(Math.random() * data.length);
-                    var place = data[i];
+        if (locationsPool.length === 0) {
+            console.warn('No locations available');
+            return;
+        }
+        var place = locationsPool.shift();
 
-                    var img = document.getElementById('image');
-                    img.src = place.image;
-                    window.actualLatLng = {lat: place.lat, lon: place.lon};
-                    window.locName = place.label;
-                    detailPic = place["detail-picture"] || '';
-                    explainerText = place.explainer || '';
-                });
-            })
-            .catch(function(err) {
-                console.warn('Fetch Error :-S', err);
-            });
+        var img = document.getElementById('image');
+        img.src = place.image;
+        window.actualLatLng = {lat: place.lat, lon: place.lon};
+        window.locName = place.label;
+        detailPic = place["detail-picture"] || '';
+        explainerText = place.explainer || '';
     };
+
+    function shuffleArray(arr){
+        for(var i = arr.length - 1; i > 0; i--){
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        return arr;
+    }
 }
 
 $(document).ready(function(){
