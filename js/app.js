@@ -183,9 +183,9 @@ function startGame() {
             );
             rminitialize();
             setTimeout(function(){
-                $('#roundEnd').css({display: 'block', visibility: 'hidden'});
+                $('#roundEnd').css({display: 'block', opacity: 0});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').css({height: h, visibility: 'visible'}).hide().fadeIn();
+                $('#roundEnd').height(h).animate({opacity: 1}, 200);
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
@@ -215,9 +215,9 @@ function startGame() {
             );
             rminitialize();
             setTimeout(function(){
-                $('#roundEnd').css({display: 'block', visibility: 'hidden'});
+                $('#roundEnd').css({display: 'block', opacity: 0});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').css({height: h, visibility: 'visible'}).hide().fadeIn();
+                $('#roundEnd').height(h).animate({opacity: 1}, 200);
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();

@@ -181,8 +181,8 @@ select {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 600px;
-    max-width: 90%;
+    width: 80%;
+    max-width: 1000px;
     margin-top: 40px;
     padding: 20px 0;
     background: white;
@@ -205,9 +205,10 @@ select {
 }
 
 #roundEnd #roundMap {
-    width: 400px;
+    width: 100%;
+    max-width: 600px;
     height: 300px;
-    margin: 20px 0;
+    margin: 20px auto;
 }
 
 
