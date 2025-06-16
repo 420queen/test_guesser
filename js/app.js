@@ -48,6 +48,7 @@ function startGame() {
     // End of round continue button click
     $('#roundEnd').on('click', '.closeBtn', function () {
         $('#roundEnd').fadeOut(500);
+        $('#scoreBoard').show();
 
         if (round < 5){
 
@@ -159,6 +160,7 @@ function startGame() {
         if(typeof distance === 'undefined' || ranOut == true){
             $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
+            $('#scoreBoard').hide();
 
             // Stop Counter
             clearInterval(counter);
@@ -179,6 +181,7 @@ function startGame() {
         } else {
             $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
+            $('#scoreBoard').hide();
         };
 
         // Reset Params
