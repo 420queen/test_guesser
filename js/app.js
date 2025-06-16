@@ -45,7 +45,7 @@ function startGame() {
         rminitialize();
     });
 
-    // End of round continue button click
+    // End of round "next round" button click
     $('#roundEnd').on('click', '.closeBtn', function () {
         $('#roundEnd').fadeOut(500);
         $('#scoreBoard').show();
@@ -77,6 +77,13 @@ function startGame() {
         } else if (round >= 5){
             endGame();
         };
+    });
+
+    // After showing round results, the first Continue button displays the
+    // explainer text instead of immediately starting the next round.
+    $('#roundEnd').on('click', '.continueBtn', function () {
+        var explainerImg = window.explainerImage ? window.explainerImage : window.currentImage;
+        $('#roundEnd').html('<p>'+window.explainer+'</p><img id="explainerImage" style="max-width:100%;" src="'+explainerImg+'"/><br/><button class="btn btn-primary closeBtn" type="button">Next Round</button>');
     });
 
     // End of game 'play again' button click
@@ -158,7 +165,7 @@ function startGame() {
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if(typeof distance === 'undefined' || ranOut == true){
-            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary continueBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
             $('#scoreBoard').hide();
 
@@ -179,7 +186,7 @@ function startGame() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary continueBtn" type="button">Continue</button></p></p>');
             $('#roundEnd').fadeIn();
             $('#scoreBoard').hide();
         };
@@ -217,8 +224,11 @@ function startGame() {
 
                     var img = document.getElementById('image');
                     img.src = place.image;
+                    window.currentImage = place.image;
                     window.actualLatLng = {lat: place.lat, lon: place.lon};
                     window.locName = place.label;
+                    window.explainer = place.explainer;
+                    window.explainerImage = place.explainerImage;
                 });
             })
             .catch(function(err) {
