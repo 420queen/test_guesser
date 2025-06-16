@@ -9,6 +9,8 @@ function startGame() {
     var totalScore = 0;
     ranOut = false;
     var distance;
+    var detailPic = '';
+    var explainerText = '';
 
     //
     //  Init maps
@@ -45,38 +47,14 @@ function startGame() {
         rminitialize();
     });
 
-    // End of round continue button click
-    $('#roundEnd').on('click', '.closeBtn', function () {
-        $('#roundEnd').fadeOut(500);
-        $('#scoreBoard').show();
+    // Show detail picture and explainer after round
+    $('#roundEnd').on('click', '.detailBtn', function () {
+        $('#roundEnd').html('<img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button>');
+    });
 
-        if (round < 5){
-
-            round++
-            if(ranOut==true){
-                roundScore = 0;
-            } else {
-                roundScore = points;
-                totalScore = totalScore + points;
-            }
-
-            $('.round').html('Current Round: <b>'+round+'/5</b>');
-            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
-            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
-
-            var img = document.getElementById('image');
-            img.src = "";
-
-            // Reload maps to refresh coords
-            svinitialize();
-            guess2.setLatLng({lat: -999, lng: -999});
-            mymap.setView([30, 10], 1);
-
-            // Reset Timer
-            resetTimer();
-        } else if (round >= 5){
-            endGame();
-        };
+    // Proceed to next round
+    $('#roundEnd').on('click', '.nextBtn', function () {
+        proceedToNextRound();
     });
 
     // End of game 'play again' button click
@@ -92,6 +70,36 @@ function startGame() {
     function resetTimer(){
         count = 999999;
         counter = setInterval(timer, 1000);
+    }
+
+    function proceedToNextRound(){
+        $('#roundEnd').fadeOut(500);
+        $('#scoreBoard').show();
+
+        if (round < 5){
+            round++;
+            if(ranOut==true){
+                roundScore = 0;
+            } else {
+                roundScore = points;
+                totalScore = totalScore + points;
+            }
+
+            $('.round').html('Current Round: <b>'+round+'/5</b>');
+            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
+            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
+
+            var img = document.getElementById('image');
+            img.src = "";
+
+            svinitialize();
+            guess2.setLatLng({lat: -999, lng: -999});
+            mymap.setView([30, 10], 1);
+
+            resetTimer();
+        } else if (round >= 5){
+            endGame();
+        }
     }
 
     // Calculate distance between points function
@@ -158,7 +166,7 @@ function startGame() {
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if(typeof distance === 'undefined' || ranOut == true){
-            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p>');
             $('#roundEnd').fadeIn();
             $('#scoreBoard').hide();
 
@@ -179,7 +187,7 @@ function startGame() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
+            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p>');
             $('#roundEnd').fadeIn();
             $('#scoreBoard').hide();
         };
@@ -219,6 +227,8 @@ function startGame() {
                     img.src = place.image;
                     window.actualLatLng = {lat: place.lat, lon: place.lon};
                     window.locName = place.label;
+                    detailPic = place["detail-picture"] || '';
+                    explainerText = place.explainer || '';
                 });
             })
             .catch(function(err) {

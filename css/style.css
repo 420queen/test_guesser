@@ -199,6 +199,16 @@ select {
     cursor: pointer;
 }
 
+#roundEnd img.detailPic {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#roundEnd .nextBtn {
+    cursor: pointer;
+}
+
 #roundMap {
     width: 500px;
     height: 500px;
