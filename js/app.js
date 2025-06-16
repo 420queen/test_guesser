@@ -9,20 +9,29 @@ function startGame() {
     var totalScore = 0;
     ranOut = false;
     var distance;
+    var detailPic = '';
+    var explainerText = '';
+    var locationsPool = [];
 
     //
-    //  Init maps
+    //  Init maps and load locations
     //
 
-    svinitialize();
-    mminitialize();
+    window.fetch('locations.json')
+        .then(function(response){ return response.json(); })
+        .then(function(data){
+            locationsPool = shuffleArray(data).slice(0,5);
+            svinitialize();
+            mminitialize();
+            resetTimer();
+        })
+        .catch(function(err){
+            console.warn('Fetch Error :-S', err);
+        });
 
     //
     // Scoreboard & Guess button event
     //
-
-    // Init Timer
-    resetTimer();
 
 
     // Timer
@@ -42,41 +51,16 @@ function startGame() {
     // Guess Button
     $('#guessButton').click(function (){
         doGuess();
-        rminitialize();
     });
 
-    // End of round continue button click
-    $('#roundEnd').on('click', '.closeBtn', function () {
-        $('#roundEnd').fadeOut(500);
-        $('#scoreBoard').show();
+    // Show detail view with swipe animation
+    $('#roundEnd').on('click', '.detailBtn', function () {
+        $('#roundEnd').addClass('show-details');
+    });
 
-        if (round < 5){
-
-            round++
-            if(ranOut==true){
-                roundScore = 0;
-            } else {
-                roundScore = points;
-                totalScore = totalScore + points;
-            }
-
-            $('.round').html('Current Round: <b>'+round+'/5</b>');
-            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
-            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
-
-            var img = document.getElementById('image');
-            img.src = "";
-
-            // Reload maps to refresh coords
-            svinitialize();
-            guess2.setLatLng({lat: -999, lng: -999});
-            mymap.setView([30, 10], 1);
-
-            // Reset Timer
-            resetTimer();
-        } else if (round >= 5){
-            endGame();
-        };
+    // Proceed to next round
+    $('#roundEnd').on('click', '.nextBtn', function () {
+        proceedToNextRound();
     });
 
     // End of game 'play again' button click
@@ -92,6 +76,39 @@ function startGame() {
     function resetTimer(){
         count = 999999;
         counter = setInterval(timer, 1000);
+    }
+
+    function proceedToNextRound(){
+        $('#roundEnd').fadeOut(500, function(){
+            $('#roundEnd').removeClass('show-details').css('height', 'auto');
+        });
+        $('#overlay').fadeOut();
+        $('#scoreBoard').show();
+
+        if (round < 5){
+            round++;
+            if(ranOut==true){
+                roundScore = 0;
+            } else {
+                roundScore = points;
+                totalScore = totalScore + points;
+            }
+
+            $('.round').html('Current Round: <b>'+round+'/5</b>');
+            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
+            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
+
+            var img = document.getElementById('image');
+            img.src = "";
+
+            svinitialize();
+            guess2.setLatLng({lat: -999, lng: -999});
+            mymap.setView([30, 10], 1);
+
+            resetTimer();
+        } else if (round >= 5){
+            endGame();
+        }
     }
 
     // Calculate distance between points function
@@ -158,8 +175,18 @@ function startGame() {
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if(typeof distance === 'undefined' || ranOut == true){
-            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
-            $('#roundEnd').fadeIn();
+            $('#roundEnd').html(
+                '<div class="slider">'+
+                    '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
+                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                '</div>'
+            ).show();
+            rminitialize();
+            setTimeout(function(){
+                var h = $('#resultContent').outerHeight();
+                $('#roundEnd').height(h).hide().fadeIn();
+            }, 50);
+            $('#overlay').fadeIn();
             $('#scoreBoard').hide();
 
             // Stop Counter
@@ -179,8 +206,18 @@ function startGame() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary closeBtn" type="button">Continue</button></p></p>');
-            $('#roundEnd').fadeIn();
+            $('#roundEnd').html(
+                '<div class="slider">'+
+                    '<div id="resultContent" class="pane"><p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
+                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                '</div>'
+            ).show();
+            rminitialize();
+            setTimeout(function(){
+                var h = $('#resultContent').outerHeight();
+                $('#roundEnd').height(h).hide().fadeIn();
+            }, 50);
+            $('#overlay').fadeIn();
             $('#scoreBoard').hide();
         };
 
@@ -205,26 +242,29 @@ function startGame() {
     }
 
     function svinitialize() {
-        window.fetch('locations.json')
-            .then(function(response) {
-                if (response.status !== 200) {
-                    console.warn(`Looks like there was a problem. Status Code: ${response.status}`);
-                    return;
-                }
-                response.json().then(function(data) {
-                    var i = Math.floor(Math.random() * data.length);
-                    var place = data[i];
+        if (locationsPool.length === 0) {
+            console.warn('No locations available');
+            return;
+        }
+        var place = locationsPool.shift();
 
-                    var img = document.getElementById('image');
-                    img.src = place.image;
-                    window.actualLatLng = {lat: place.lat, lon: place.lon};
-                    window.locName = place.label;
-                });
-            })
-            .catch(function(err) {
-                console.warn('Fetch Error :-S', err);
-            });
+        var img = document.getElementById('image');
+        img.src = place.image;
+        window.actualLatLng = {lat: place.lat, lon: place.lon};
+        window.locName = place.label;
+        detailPic = place["detail-picture"] || '';
+        explainerText = place.explainer || '';
     };
+
+    function shuffleArray(arr){
+        for(var i = arr.length - 1; i > 0; i--){
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+        return arr;
+    }
 }
 
 $(document).ready(function(){
