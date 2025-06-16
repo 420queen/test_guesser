@@ -189,6 +189,19 @@ select {
     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
 }
 
+#explainerBox {
+    position: absolute;
+    left: 50%;
+    width: 400px;
+    margin: 40px 0 0 -200px;
+    padding: 20px;
+    background: white;
+    text-align: center;
+    display: none;
+    z-index: 1005;
+    box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
+}
+
 #roundEnd #roundMap {
     width: 400px;
     height: 300px;
@@ -259,6 +272,7 @@ select {
 
     /* make the round result and final result boxes fit the viewport */
     #roundEnd,
+    #explainerBox,
     #endGame {
         width: 90%;
         left: 50%;
