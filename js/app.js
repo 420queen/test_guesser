@@ -47,36 +47,18 @@ function startGame() {
 
     // End of round continue button click
     $('#roundEnd').on('click', '.closeBtn', function () {
-        $('#roundEnd').fadeOut(500);
+        $('#roundEnd').fadeOut(500, function(){
+            $('#explainerText').text(window.locExplainer);
+            $('#explainerBox').fadeIn(500);
+            document.getElementById('explainerBox').scrollIntoView({behavior: 'smooth'});
+        });
         $('#scoreBoard').show();
+    });
 
-        if (round < 5){
-
-            round++
-            if(ranOut==true){
-                roundScore = 0;
-            } else {
-                roundScore = points;
-                totalScore = totalScore + points;
-            }
-
-            $('.round').html('Current Round: <b>'+round+'/5</b>');
-            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
-            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
-
-            var img = document.getElementById('image');
-            img.src = "";
-
-            // Reload maps to refresh coords
-            svinitialize();
-            guess2.setLatLng({lat: -999, lng: -999});
-            mymap.setView([30, 10], 1);
-
-            // Reset Timer
-            resetTimer();
-        } else if (round >= 5){
-            endGame();
-        };
+    // Explainer "next round" button
+    $('#explainerBox').on('click', '#nextRoundButton', function () {
+        $('#explainerBox').fadeOut(500);
+        nextRound();
     });
 
     // End of game 'play again' button click
@@ -189,7 +171,7 @@ function startGame() {
 
     };
 
-    function endGame(){
+function endGame(){
 
         roundScore = points;
         totalScore = totalScore + points;
@@ -219,12 +201,43 @@ function startGame() {
                     img.src = place.image;
                     window.actualLatLng = {lat: place.lat, lon: place.lon};
                     window.locName = place.label;
+                    window.locExplainer = place.explainer || '';
                 });
             })
             .catch(function(err) {
                 console.warn('Fetch Error :-S', err);
             });
     };
+
+    function nextRound(){
+        if (round < 5){
+
+            round++
+            if(ranOut==true){
+                roundScore = 0;
+            } else {
+                roundScore = points;
+                totalScore = totalScore + points;
+            }
+
+            $('.round').html('Current Round: <b>'+round+'/5</b>');
+            $('.roundScore').html('Last Round Score: <b>'+roundScore+'</b>');
+            $('.totalScore').html('Total Score: <b>'+totalScore+'</b>');
+
+            var img = document.getElementById('image');
+            img.src = "";
+
+            // Reload maps to refresh coords
+            svinitialize();
+            guess2.setLatLng({lat: -999, lng: -999});
+            mymap.setView([30, 10], 1);
+
+            // Reset Timer
+            resetTimer();
+        } else {
+            endGame();
+        }
+    }
 }
 
 $(document).ready(function(){
