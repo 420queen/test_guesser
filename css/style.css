@@ -190,15 +190,23 @@ select {
     overflow: hidden;
 }
 
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1004;
+}
+
 #roundEnd #roundMap {
     width: 400px;
     height: 300px;
     margin: 20px 0;
 }
 
-#roundEnd .closeBtn {
-    cursor: pointer;
-}
 
 #roundEnd img.detailPic {
     width: 100%;
@@ -206,9 +214,17 @@ select {
     margin-bottom: 20px;
 }
 
+#detailContent p {
+    font-size: 18px;
+}
+
+#roundEnd .detailBtn,
 #roundEnd .nextBtn {
+    padding: 10px 20px;
+    font-size: 20px;
     cursor: pointer;
 }
+
 
 #roundEnd .slider {
     display: flex;

@@ -44,7 +44,6 @@ function startGame() {
     // Guess Button
     $('#guessButton').click(function (){
         doGuess();
-        rminitialize();
     });
 
     // Show detail view with swipe animation
@@ -76,6 +75,7 @@ function startGame() {
         $('#roundEnd').removeClass('show-details').fadeOut(500, function(){
             $('#roundEnd').css('height', 'auto');
         });
+        $('#overlay').fadeOut();
         $('#scoreBoard').show();
 
         if (round < 5){
@@ -174,8 +174,10 @@ function startGame() {
                     '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
             );
+            rminitialize();
             var h = $('#resultContent').outerHeight();
             $('#roundEnd').height(h).fadeIn();
+            $('#overlay').fadeIn();
             $('#scoreBoard').hide();
 
             // Stop Counter
@@ -201,8 +203,10 @@ function startGame() {
                     '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
             );
+            rminitialize();
             var h = $('#resultContent').outerHeight();
             $('#roundEnd').height(h).fadeIn();
+            $('#overlay').fadeIn();
             $('#scoreBoard').hide();
         };
 
