@@ -182,7 +182,7 @@ select {
     left: 50%;
     width: 400px;
     margin: 40px 0 0 -200px;
-    padding: 20px;
+    padding: 20px 0;
     background: white;
     text-align: center;
     display: none;
@@ -217,6 +217,7 @@ select {
 
 #detailContent p {
     font-size: 18px;
+    padding: 20px 0;
 }
 
 #roundEnd .detailBtn,
@@ -236,6 +237,8 @@ select {
 #roundEnd .pane {
     width: 50%;
     flex-shrink: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 #roundEnd.show-details .slider {

@@ -72,8 +72,8 @@ function startGame() {
     }
 
     function proceedToNextRound(){
-        $('#roundEnd').removeClass('show-details').fadeOut(500, function(){
-            $('#roundEnd').css('height', 'auto');
+        $('#roundEnd').fadeOut(500, function(){
+            $('#roundEnd').removeClass('show-details').css('height', 'auto');
         });
         $('#overlay').fadeOut();
         $('#scoreBoard').show();
