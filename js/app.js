@@ -175,8 +175,10 @@ function startGame() {
                 '</div>'
             ).show();
             rminitialize();
-            var h = $('#resultContent').outerHeight();
-            $('#roundEnd').height(h).hide().fadeIn();
+            setTimeout(function(){
+                var h = $('#resultContent').outerHeight();
+                $('#roundEnd').height(h).hide().fadeIn();
+            }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
 
@@ -204,8 +206,10 @@ function startGame() {
                 '</div>'
             ).show();
             rminitialize();
-            var h = $('#resultContent').outerHeight();
-            $('#roundEnd').height(h).hide().fadeIn();
+            setTimeout(function(){
+                var h = $('#resultContent').outerHeight();
+                $('#roundEnd').height(h).hide().fadeIn();
+            }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
         };
