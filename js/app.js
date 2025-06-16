@@ -23,7 +23,6 @@ function startGame() {
             locationsPool = shuffleArray(data).slice(0,5);
             svinitialize();
             mminitialize();
-            resetTimer();
         })
         .catch(function(err){
             console.warn('Fetch Error :-S', err);
@@ -32,22 +31,6 @@ function startGame() {
     //
     // Scoreboard & Guess button event
     //
-
-
-    // Timer
-    function timer() {
-        count = count-1;
-        if (count <= 0) {
-            if (round < 5){
-                endRound();
-            } else if (round >= 5){
-                endGame();
-            };
-            clearInterval(counter);
-        }
-        $("#timer").html(count);
-    };
-
     // Guess Button
     $('#guessButton').click(function (){
         doGuess();
@@ -72,11 +55,6 @@ function startGame() {
     // Functions
     //
 
-    // Reset Timer
-    function resetTimer(){
-        count = 999999;
-        counter = setInterval(timer, 1000);
-    }
 
     function proceedToNextRound(){
         $('#roundEnd').fadeOut(500, function(){
@@ -105,7 +83,6 @@ function startGame() {
             guess2.setLatLng({lat: -999, lng: -999});
             mymap.setView([30, 10], 1);
 
-            resetTimer();
         } else if (round >= 5){
             endGame();
         }
@@ -134,9 +111,6 @@ function startGame() {
     function doGuess(){
         if (ranOut == false){
 
-            // Stop Counter
-            clearInterval(counter);
-
             // Reset marker function
             function resetMarker() {
                 //Reset marker
@@ -162,12 +136,8 @@ function startGame() {
             endRound();
 
         } else {
-
             // They ran out
-
         }
-
-        timer();
 
     };
 
@@ -195,8 +165,7 @@ function startGame() {
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
 
-            // Stop Counter
-            clearInterval(counter);
+
 
             // Reset marker function
             function resetMarker() {
