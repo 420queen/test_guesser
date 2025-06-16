@@ -180,11 +180,12 @@ function startGame() {
                     '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
                     '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
-            ).show();
+            );
             rminitialize();
             setTimeout(function(){
+                $('#roundEnd').css({display: 'block', visibility: 'hidden'});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').height(h).hide().fadeIn();
+                $('#roundEnd').css({height: h, visibility: 'visible'}).hide().fadeIn();
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
@@ -211,11 +212,12 @@ function startGame() {
                     '<div id="resultContent" class="pane"><p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
                     '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
-            ).show();
+            );
             rminitialize();
             setTimeout(function(){
+                $('#roundEnd').css({display: 'block', visibility: 'hidden'});
                 var h = $('#resultContent').outerHeight();
-                $('#roundEnd').height(h).hide().fadeIn();
+                $('#roundEnd').css({height: h, visibility: 'visible'}).hide().fadeIn();
             }, 50);
             $('#overlay').fadeIn();
             $('#scoreBoard').hide();
