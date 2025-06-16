@@ -168,7 +168,7 @@ select {
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    max-width: 1000px;
+    max-width: 800px;
     margin-top: 40px;
     padding: 20px 0;
     background: white;
