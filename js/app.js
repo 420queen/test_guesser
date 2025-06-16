@@ -47,9 +47,9 @@ function startGame() {
         rminitialize();
     });
 
-    // Show detail picture and explainer after round
+    // Show detail view with swipe animation
     $('#roundEnd').on('click', '.detailBtn', function () {
-        $('#roundEnd').html('<img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button>');
+        $('#roundEnd').addClass('show-details');
     });
 
     // Proceed to next round
@@ -73,7 +73,9 @@ function startGame() {
     }
 
     function proceedToNextRound(){
-        $('#roundEnd').fadeOut(500);
+        $('#roundEnd').removeClass('show-details').fadeOut(500, function(){
+            $('#roundEnd').css('height', 'auto');
+        });
         $('#scoreBoard').show();
 
         if (round < 5){
@@ -166,8 +168,14 @@ function startGame() {
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if(typeof distance === 'undefined' || ranOut == true){
-            $('#roundEnd').html('<p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p>');
-            $('#roundEnd').fadeIn();
+            $('#roundEnd').html(
+                '<div class="slider">'+
+                    '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
+                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                '</div>'
+            );
+            var h = $('#resultContent').outerHeight();
+            $('#roundEnd').height(h).fadeIn();
             $('#scoreBoard').hide();
 
             // Stop Counter
@@ -187,8 +195,14 @@ function startGame() {
             points = 0;
 
         } else {
-            $('#roundEnd').html('<p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p>');
-            $('#roundEnd').fadeIn();
+            $('#roundEnd').html(
+                '<div class="slider">'+
+                    '<div id="resultContent" class="pane"><p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
+                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                '</div>'
+            );
+            var h = $('#resultContent').outerHeight();
+            $('#roundEnd').height(h).fadeIn();
             $('#scoreBoard').hide();
         };
 
