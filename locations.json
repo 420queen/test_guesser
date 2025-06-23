@@ -24,14 +24,6 @@
   "detail-picture": "https://i.postimg.cc/3NzVpGw2/temp-Image-F6-Inrj.avif", 
   "explainer": "Amid post-coup instability, MSF continued providing HIV, TB, and basic health services across Myanmar in 2022. Mobile clinics supported displaced people, though access was frequently hampered by conflict and government restrictions."
 },
-{
-  "image": "https://i.postimg.cc/0jVgT76R/temp-Image-AAHa-CH.avif",
-  "lat": 9.2772,
-  "lon": 29.7859,
-  "label": "South-Sudan, Aerial view Bentiu IDP camp",
-  "detail-picture": "https://i.postimg.cc/3NzVpGw2/temp-Image-F6-Inrj.avif",
-  "explainer": "MSF runs the only hospital in Bentiu’s large displacement camp, treating thousands for malaria, respiratory infections, and malnutrition. They also provide maternal care and emergency services, while addressing outbreaks caused by poor sanitation."
-},
   {
   "image": "https://i.postimg.cc/YCgng1pr/temp-Image-BRnbx0.avif",
   "lat": -3.3619,
@@ -39,6 +31,14 @@
   "label": "Brazil, MSF response to COVID-19 around Tefé",
   "detail-picture": "https://i.postimg.cc/3NzVpGw2/temp-Image-F6-Inrj.avif",  
   "explainer": "In 2020, MSF helped overwhelmed hospitals in Manaus and sent mobile teams to remote Amazon towns. They provided ICU support, ran isolation centers, and cared for vulnerable communities, including indigenous groups and refugees."
+},
+  {
+  "image": "pictures/MSB143916(High)",
+  "lat": 26.0466,
+  "lon": 68.9481,
+  "label": "District de Singhar, Province de Sindh, Pakistan",
+  "detail-picture": "pictures/MSB143915",  
+  "explainer": "Après les importantes inondation survenues au Pakistan en novembre 2022, les équipes MSF préparent et distribuent des biens de première nécessité  dans un village près de Sanghar, dans la province du Sindh, au Pakistan. Les équipes ont également distribué de l'eau potable et des kits d'hygiènes à des miliers de familles."
 }
 
 ]
