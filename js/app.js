@@ -17,16 +17,10 @@ function startGame() {
     //  Init maps and load locations
     //
 
-    window.fetch('locations.json')
-        .then(function(response){ return response.json(); })
-        .then(function(data){
-            locationsPool = shuffleArray(data).slice(0,5);
-            svinitialize();
-            mminitialize();
-        })
-        .catch(function(err){
-            console.warn('Fetch Error :-S', err);
-        });
+    // Using embedded data for offline use
+    locationsPool = shuffleArray(LOCATIONS_DATA).slice(0,5);
+    svinitialize();
+    mminitialize();
 
     //
     // Scoreboard & Guess button event
@@ -248,9 +242,13 @@ function startGame() {
     }
 }
 
-$(document).ready(function(){
-    $('#startButton').on('click', function(){
-        $('#welcomeScreen').fadeOut(500, function(){
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.jQuery === 'undefined') {
+        alert('jQuery is missing. Place jquery-3.7.1.min.js in a folder named "libs".');
+        return;
+    }
+    $('#startButton').on('click', function () {
+        $('#welcomeScreen').fadeOut(500, function () {
             startGame();
         });
     });
