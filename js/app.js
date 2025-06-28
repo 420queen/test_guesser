@@ -242,9 +242,13 @@ function startGame() {
     }
 }
 
-$(document).ready(function(){
-    $('#startButton').on('click', function(){
-        $('#welcomeScreen').fadeOut(500, function(){
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.jQuery === 'undefined') {
+        alert('jQuery is missing. Place jquery-3.7.1.min.js in a folder named "libs".');
+        return;
+    }
+    $('#startButton').on('click', function () {
+        $('#welcomeScreen').fadeOut(500, function () {
             startGame();
         });
     });

@@ -11,16 +11,17 @@ License: GPLv3+
 Offline setup
 -------------
 
-To run the game without an internet connection place the following assets in the
-project root:
+Follow these steps to run the game completely offline:
 
-* `jquery-3.7.1.min.js` inside a folder named `libs`.
-* A folder named `leaflet` containing `leaflet.js` and `leaflet.css`.
-* Your map tiles in a `tiles/` folder (`tiles/{z}/{x}/{y}.png`). If you have an
-  `.mbtiles` file, convert it to this structure first using a tool such as
-  `mb-util`.
-* The `locations.js` file (included in the repository) which embeds the
-  location data so no server is required.
+1. Create a folder called `libs` next to `index.html` and put the file
+   `jquery-3.7.1.min.js` inside it. Make sure the name matches exactly.
+2. Download Leaflet from <https://leafletjs.com/download.html> and copy
+   `leaflet.js` and `leaflet.css` into a folder named `leaflet`.
+3. Prepare your map tiles. If you only have a `.mbtiles` file, use a tool like
+   `mb-util` to convert it into a folder structure `tiles/{z}/{x}/{y}.png`.
+4. Copy the entire project (including the `tiles` folder) onto your SD card.
+5. Open `index.html` in the tablet's browser. The game should start even in
+   airplane mode.
 
-Once the files are in place, open `index.html` directly from your SD card in the
-tablet's browser to play offline. No web server is needed.
+The `locations.js` file already contains the location data so no server is
+needed.
