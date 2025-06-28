@@ -16,11 +16,9 @@ project root:
 
 * `jquery-3.7.1.min.js` inside a folder named `libs`.
 * A folder named `leaflet` containing `leaflet.js` and `leaflet.css`.
-* Your map tiles in `maptiler-osm-2020-02-10-v3.11-planet.mbtiles` (or a
-  `tiles/` folder if you extract raster tiles).
-* Optionally `Leaflet.TileLayer.MBTiles.js` together with `sql-wasm.js` and
-  `sql-wasm.wasm` in the `libs` folder if you want to load the `.mbtiles` file
-  directly.
+* Your map tiles in a `tiles/` folder (`tiles/{z}/{x}/{y}.png`). If you have an
+  `.mbtiles` file, convert it to this structure first using a tool such as
+  `mb-util`.
 * The `locations.js` file (included in the repository) which embeds the
   location data so no server is required.
 

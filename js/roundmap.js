@@ -5,15 +5,9 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    if (L.tileLayer.mbTiles) {
-        L.tileLayer.mbTiles('maptiler-osm-2020-02-10-v3.11-planet.mbtiles', {
-            maxZoom: 18
-        }).addTo(roundmap);
-    } else {
-        L.tileLayer('tiles/{z}/{x}/{y}.png', {
-            maxZoom: 18
-        }).addTo(roundmap);
-    }
+    L.tileLayer('tiles/{z}/{x}/{y}.png', {
+        maxZoom: 18
+    }).addTo(roundmap);
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
