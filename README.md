@@ -17,11 +17,13 @@ Follow these steps to run the game completely offline:
    `jquery-3.7.1.min.js` inside it. Make sure the name matches exactly.
 2. Download Leaflet from <https://leafletjs.com/download.html> and copy
    `leaflet.js` and `leaflet.css` into a folder named `leaflet`.
-3. Prepare your map tiles. If you only have a `.mbtiles` file, use a tool like
+3. Prepare your map tiles. If you have a `.mbtiles` file, use a tool such as
    `mb-util` to convert it into a folder structure `tiles/{z}/{x}/{y}.png`.
+   The game expects this `tiles` folder next to `index.html`.
 4. Copy the entire project (including the `tiles` folder) onto your SD card.
 5. Open `index.html` in the tablet's browser. The game should start even in
-   airplane mode.
+   airplane mode. If the map stays blank, check that the `tiles` folder exists
+   and contains images.
 
 The `locations.js` file already contains the location data so no server is
 needed.

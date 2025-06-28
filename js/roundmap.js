@@ -5,9 +5,13 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    L.tileLayer('tiles/{z}/{x}/{y}.png', {
+    var tiles = L.tileLayer('tiles/{z}/{x}/{y}.png', {
         maxZoom: 18
-    }).addTo(roundmap);
+    });
+    tiles.on('tileerror', function() {
+        alert('Map tiles could not be loaded. Make sure the "tiles" folder is present.');
+    });
+    tiles.addTo(roundmap);
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
