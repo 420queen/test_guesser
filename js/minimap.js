@@ -7,11 +7,11 @@ function mminitialize() {
 
     mymap.setView([30, 10], 1);
 
-    var tiles = L.tileLayer('tiles/{z}/{x}/{y}.png', {
+    var tiles = L.tileLayer.mbTiles('libs/maptiler-osm-2020-02-10-v3.11-planet.mbtiles', {
         maxZoom: 18
     });
-    tiles.on('tileerror', function() {
-        alert('Map tiles could not be loaded. Make sure the "tiles" folder is present.');
+    tiles.on('databaseerror', function() {
+        alert('Map tiles could not be loaded. Check the MBTiles file in the "libs" folder.');
     });
     tiles.addTo(mymap);
 
