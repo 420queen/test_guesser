@@ -1,7 +1,7 @@
 Wikidata Guessr
 ===============
 
-Guess the locations of random images stored in `locations.json`.
+Guess the locations of random images stored in `locations.js`.
 
 Based on [whereami](https://github.com/webdevbrian/whereami), a GeoGuessr reimplementation by [Brian Kinney](http://www.thebriankinney.com/).
 
@@ -21,6 +21,8 @@ project root:
 * Optionally `Leaflet.TileLayer.MBTiles.js` together with `sql-wasm.js` and
   `sql-wasm.wasm` in the `libs` folder if you want to load the `.mbtiles` file
   directly.
+* The `locations.js` file (included in the repository) which embeds the
+  location data so no server is required.
 
-Once the files are in place, open `index.html` from the tablet's browser to play
-offline.
+Once the files are in place, open `index.html` directly from your SD card in the
+tablet's browser to play offline. No web server is needed.

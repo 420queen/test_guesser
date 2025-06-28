@@ -17,16 +17,10 @@ function startGame() {
     //  Init maps and load locations
     //
 
-    window.fetch('locations.json')
-        .then(function(response){ return response.json(); })
-        .then(function(data){
-            locationsPool = shuffleArray(data).slice(0,5);
-            svinitialize();
-            mminitialize();
-        })
-        .catch(function(err){
-            console.warn('Fetch Error :-S', err);
-        });
+    // Using embedded data for offline use
+    locationsPool = shuffleArray(LOCATIONS_DATA).slice(0,5);
+    svinitialize();
+    mminitialize();
 
     //
     // Scoreboard & Guess button event
