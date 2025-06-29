@@ -1,17 +1,22 @@
-function startGame() {
-    //
-    // Setup
-    //
+var SQLPromise = initSqlJs({ locateFile: file => 'libs/' + file }).then(function(SQL){
+    window.SQL = SQL;
+});
 
-    var round = 1;
-    var points = 0;
-    var roundScore = 0;
-    var totalScore = 0;
-    ranOut = false;
-    var distance;
-    var detailPic = '';
-    var explainerText = '';
-    var locationsPool = [];
+function startGame() {
+    SQLPromise.then(function(){
+        //
+        // Setup
+        //
+
+        var round = 1;
+        var points = 0;
+        var roundScore = 0;
+        var totalScore = 0;
+        ranOut = false;
+        var distance;
+        var detailPic = '';
+        var explainerText = '';
+        var locationsPool = [];
 
     //
     //  Init maps and load locations
@@ -246,6 +251,7 @@ function startGame() {
         }
         return arr;
     }
+    });
 }
 
 $(document).ready(function(){
