@@ -5,10 +5,15 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    // Use offline tiles from the bundled MBTiles database
+    var mb = new L.TileLayer.MBTiles('libs/maptiler-osm-2020-02-10-v3.11-planet.mbtiles', {
         maxZoom: 18
-    }).addTo(roundmap);
+    });
+    mb.on('databaseerror', function(err){
+        alert('Failed to load map tiles for the round view. Start a local web server.');
+        console.error('MBTiles error', err);
+    });
+    mb.addTo(roundmap);
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",

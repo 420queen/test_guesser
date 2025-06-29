@@ -17,16 +17,14 @@ function startGame() {
     //  Init maps and load locations
     //
 
-    window.fetch('locations.json')
-        .then(function(response){ return response.json(); })
-        .then(function(data){
-            locationsPool = shuffleArray(data).slice(0,5);
-            svinitialize();
-            mminitialize();
-        })
-        .catch(function(err){
-            console.warn('Fetch Error :-S', err);
-        });
+    // Load locations data from the embedded script for offline use
+    if (window.LOCATIONS_DATA && Array.isArray(window.LOCATIONS_DATA)) {
+        locationsPool = shuffleArray(window.LOCATIONS_DATA.slice()).slice(0,5);
+        svinitialize();
+        mminitialize();
+    } else {
+        console.warn('Locations data missing');
+    }
 
     //
     // Scoreboard & Guess button event
