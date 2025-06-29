@@ -1,7 +1,7 @@
 Wikidata Guessr
 ===============
 
-Guess the locations of random images stored in `locations.json`.
+Guess the locations of random images stored in `locations.js`.
 
 Offline use
 -----------
@@ -11,7 +11,8 @@ libraries such as Leaflet, jQuery and the SQLite powered MBTiles loader should
 be placed in the `leaflet/` and `libs/` directories.  Include an `.mbtiles`
 file (for example `maptiler-osm-2020-02-10-v3.11-planet.mbtiles`) in the `libs/` folder.  The game
 will read tiles from this database using `Leaflet.TileLayer.MBTiles.js` so that
-maps work offline.
+maps work offline.  The location data is embedded in `locations.js`, so the
+game does not need to fetch anything over the network.
 
 Open `index.html` from your SD card to start playing.
 
