@@ -7,8 +7,7 @@ function mminitialize() {
 
     mymap.setView([30, 10], 1);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    L.tileLayer('/tiles/{z}/{x}/{y}.png', {
         maxZoom: 18
     }).addTo(mymap);
 
