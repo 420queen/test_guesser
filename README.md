@@ -8,10 +8,12 @@ Based on [whereami](https://github.com/webdevbrian/whereami), a GeoGuessr reimpl
 ## Offline setup
 
 1. Place your MBTiles file at `tiles/tiles.mbtiles` in the project directory.
-2. Install dependencies with `npm install`.
-3. Start the local server using `npm start` and open the provided URL in your browser.
+2. Install dependencies with `npm install` (requires Node).
+3. Start the integrated server with `npm start`.
+4. Open <http://localhost:3000> in your browser to play.
 
-Any static server such as `python3 -m http.server` will also work, as long as it serves the project root.
+The server streams tiles directly from the MBTiles file so even very large
+files work without loading them into the browser.
 
 License: GPLv3+
 ===============

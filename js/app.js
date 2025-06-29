@@ -1,9 +1,4 @@
-var SQLPromise = initSqlJs({ locateFile: file => 'libs/' + file }).then(function(SQL){
-    window.SQL = SQL;
-});
-
 function startGame() {
-    SQLPromise.then(function(){
         //
         // Setup
         //
@@ -251,7 +246,6 @@ function startGame() {
         }
         return arr;
     }
-    });
 }
 
 $(document).ready(function(){

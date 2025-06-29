@@ -5,12 +5,11 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    window.SQLPromise.then(function(){
-        L.tileLayer.mbTiles('tiles/tiles.mbtiles', {
-            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-            maxZoom: 18
-        }).addTo(roundmap);
-    });
+    L.tileLayer('tiles/{z}/{x}/{y}.png', {
+        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+        tms: true
+    }).addTo(roundmap);
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
