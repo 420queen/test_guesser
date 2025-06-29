@@ -7,8 +7,8 @@ function mminitialize() {
 
     mymap.setView([30, 10], 1);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    // Load tiles from the local MBTiles database for offline usage
+    new L.TileLayer.MBTiles('libs/maptiler-osm-2020.mbtiles', {
         maxZoom: 18
     }).addTo(mymap);
 
