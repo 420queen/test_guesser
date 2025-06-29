@@ -1,9 +1,31 @@
 Wikidata Guessr
 ===============
 
-Guess the locations of random images stored in `locations.json`.
+Guess the locations of random images stored in `locations.js`.
+
+Offline use
+-----------
+
+This project can run entirely without an internet connection. All third party libraries such as Leaflet, jQuery and the SQLite powered MBTiles loader should be placed in the `leaflet/` and `libs/` directories. Include an `.mbtiles` file (for example `maptiler-osm-2020-02-10-v3.11-planet.mbtiles`) in the `libs/` folder. The game will read tiles from this database using `Leaflet.TileLayer.MBTiles.js` so that maps work offline. The location data is embedded in `locations.js`, so the game does not need to fetch anything over the network. If the MBTiles file cannot be loaded automatically, use the file selector on the welcome screen to pick it manually.
+
+Open `index.html` from your SD card to start playing.
 
 Based on [whereami](https://github.com/webdevbrian/whereami), a GeoGuessr reimplementation by [Brian Kinney](http://www.thebriankinney.com/).
 
 License: GPLv3+
 ===============
+
+Running a local server
+----------------------
+
+If you want to host the game with Node.js, install the dependencies and start
+`server.js`:
+
+```
+npm install
+npm start
+```
+
+The server will expose the project on <http://localhost:8080>. Ensure that your
+MBTiles file (`maptiler-osm-2020-02-10-v3.11-planet.mbtiles`) is placed inside
+the `libs/` directory so that the map tiles can be loaded by the browser.
