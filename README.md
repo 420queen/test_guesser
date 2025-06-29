@@ -14,3 +14,18 @@ Based on [whereami](https://github.com/webdevbrian/whereami), a GeoGuessr reimpl
 
 License: GPLv3+
 ===============
+
+Running a local server
+----------------------
+
+If you want to host the game with Node.js, install the dependencies and start
+`server.js`:
+
+```
+npm install
+npm start
+```
+
+The server will expose the project on <http://localhost:8080>. Ensure that your
+MBTiles file (`maptiler-osm-2020-02-10-v3.11-planet.mbtiles`) is placed inside
+the `libs/` directory so that the map tiles can be loaded by the browser.
