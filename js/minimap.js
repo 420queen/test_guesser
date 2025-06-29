@@ -8,7 +8,7 @@ function mminitialize() {
     mymap.setView([30, 10], 1);
 
     // Load tiles from the local MBTiles database for offline usage
-    new L.TileLayer.MBTiles('libs/maptiler-osm-2020.mbtiles', {
+    new L.TileLayer.MBTiles('libs/maptiler-osm-2020-02-10-v3.11-planet.mbtiles', {
         maxZoom: 18
     }).addTo(mymap);
 

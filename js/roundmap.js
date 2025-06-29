@@ -6,7 +6,7 @@ function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
     // Use offline tiles from the bundled MBTiles database
-    new L.TileLayer.MBTiles('libs/maptiler-osm-2020.mbtiles', {
+    new L.TileLayer.MBTiles('libs/maptiler-osm-2020-02-10-v3.11-planet.mbtiles', {
         maxZoom: 18
     }).addTo(roundmap);
 

@@ -9,7 +9,7 @@ Offline use
 This project can run entirely without an internet connection. All third party
 libraries such as Leaflet, jQuery and the SQLite powered MBTiles loader should
 be placed in the `leaflet/` and `libs/` directories.  Include an `.mbtiles`
-file (for example `maptiler-osm-2020.mbtiles`) in the `libs/` folder.  The game
+file (for example `maptiler-osm-2020-02-10-v3.11-planet.mbtiles`) in the `libs/` folder.  The game
 will read tiles from this database using `Leaflet.TileLayer.MBTiles.js` so that
 maps work offline.
 
