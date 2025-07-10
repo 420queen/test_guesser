@@ -28,9 +28,19 @@
         ty = Math.min(Math.max(ty, minY), maxY);
     }
 
-    function apply() {
+    function apply(animated = false) {
         clamp();
-        img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        if (animated) {
+            img.style.transition = 'transform 0.3s ease';
+            requestAnimationFrame(() => {
+                img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+            });
+            setTimeout(() => {
+                img.style.transition = ''; // remove transition after animation
+            }, 300);
+        } else {
+            img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        }
     }
 
     function onWheel(e) {
@@ -123,5 +133,25 @@
     img.addEventListener('pointercancel', pointerUp);
     document.addEventListener('pointerup', pointerUp);
 
-    apply(); // Initial transform
+    // 🔁 Fit and center the image on load
+    img.addEventListener('load', function () {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const imageWidth = img.naturalWidth;
+        const imageHeight = img.naturalHeight;
+
+        // Cover logic (like object-fit: cover)
+        const scaleX = containerWidth / imageWidth;
+        const scaleY = containerHeight / imageHeight;
+        scale = Math.max(scaleX, scaleY); // ensure it covers container
+
+        // Center the image
+        const scaledWidth = imageWidth * scale;
+        const scaledHeight = imageHeight * scale;
+        tx = (containerWidth - scaledWidth) / 2;
+        ty = (containerHeight - scaledHeight) / 2;
+
+        apply(true); // with animation
+    });
 })();
