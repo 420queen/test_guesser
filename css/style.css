@@ -99,15 +99,16 @@ button, .btn {
 
 #image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 1;
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  transform-origin: top left;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
 
 #image.grabbing {
