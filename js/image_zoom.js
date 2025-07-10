@@ -4,7 +4,7 @@
     if (!img || !container) return;
 
     let scale = 1;
-    const minScale = 1;
+    let minScale = 1; // will be set on load
     const maxScale = 5;
     let tx = 0;
     let ty = 0;
@@ -36,7 +36,7 @@
                 img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
             });
             setTimeout(() => {
-                img.style.transition = ''; // remove transition after animation
+                img.style.transition = '';
             }, 300);
         } else {
             img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
@@ -133,7 +133,6 @@
     img.addEventListener('pointercancel', pointerUp);
     document.addEventListener('pointerup', pointerUp);
 
-    // 🔁 Fit and center the image on load
     img.addEventListener('load', function () {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
@@ -141,17 +140,18 @@
         const imageWidth = img.naturalWidth;
         const imageHeight = img.naturalHeight;
 
-        // Cover logic (like object-fit: cover)
         const scaleX = containerWidth / imageWidth;
         const scaleY = containerHeight / imageHeight;
-        scale = Math.max(scaleX, scaleY); // ensure it covers container
+        scale = Math.max(scaleX, scaleY); // fill container (cover-fit)
 
-        // Center the image
+        minScale = scale; // prevent zooming out below initial size
+
         const scaledWidth = imageWidth * scale;
         const scaledHeight = imageHeight * scale;
+
         tx = (containerWidth - scaledWidth) / 2;
         ty = (containerHeight - scaledHeight) / 2;
 
-        apply(true); // with animation
+        apply(true); // animate on load
     });
 })();
