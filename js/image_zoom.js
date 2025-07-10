@@ -18,9 +18,13 @@
 
 
 
-        const minX = containerWidth * (1 - scale) / scale;
+        // Allow panning across the entire zoomed image
+        // When zoomed in, the image width becomes containerWidth * scale.
+        // The minimum translation should therefore be the difference between
+        // the container width and the scaled width.
+        const minX = containerWidth * (1 - scale);
         const maxX = 0;
-        const minY = containerHeight * (1 - scale) / scale;
+        const minY = containerHeight * (1 - scale);
         const maxY = 0;
 
         tx = Math.min(Math.max(tx, minX), maxX);
