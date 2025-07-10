@@ -41,6 +41,11 @@ function startGame() {
         $('#roundEnd').addClass('show-details');
     });
 
+    // Return to result view from details
+    $('#roundEnd').on('click', '.backBtn', function () {
+        $('#roundEnd').removeClass('show-details');
+    });
+
     // Proceed to next round
     $('#roundEnd').on('click', '.nextBtn', function () {
         proceedToNextRound();
@@ -148,7 +153,7 @@ function startGame() {
             $('#roundEnd').html(
                 '<div class="slider">'+
                     '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
-                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                    '<div id="detailContent" class="pane"><h2>'+window.locName+'</h2><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-secondary backBtn" type="button">Retour</button><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
             );
             rminitialize();
@@ -184,7 +189,7 @@ function startGame() {
             $('#roundEnd').html(
                 '<div class="slider">'+
                     '<div id="resultContent" class="pane"><p>Your guess was<br/><strong><h1>'+distance+'</strong>km</h1> away from the actual location,<br/><h2>'+window.locName+'</h2><div id="roundMap"></div><br/> You have scored<br/><h1>'+roundScore+' points</h1> this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
-                    '<div id="detailContent" class="pane"><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                    '<div id="detailContent" class="pane"><h2>'+window.locName+'</h2><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-secondary backBtn" type="button">Retour</button><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                 '</div>'
             );
             rminitialize();

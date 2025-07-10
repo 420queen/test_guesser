@@ -176,7 +176,8 @@ select {
     display: none;
     z-index: 1005;
     box-shadow: 0px 0px 20px rgba(255,255,255, 0.9);
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
 #overlay {
@@ -209,10 +210,15 @@ select {
 }
 
 #roundEnd .detailBtn,
-#roundEnd .nextBtn {
+#roundEnd .nextBtn,
+#roundEnd .backBtn {
     padding: 10px 20px;
     font-size: 20px;
     cursor: pointer;
+}
+
+#roundEnd .backBtn {
+    margin-right: 10px;
 }
 
 
