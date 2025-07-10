@@ -1,6 +1,7 @@
 (function () {
     const img = document.getElementById('image');
-    if (!img) return;
+    const container = document.getElementById('imageContainer');
+    if (!img || !container) return;
 
     let scale = 1;
     const minScale = 1;
@@ -12,7 +13,6 @@
     const start = {};
 
     function clamp() {
-        const container = img.parentElement;
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
