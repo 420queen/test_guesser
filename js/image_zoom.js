@@ -16,15 +16,11 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        const imageWidth = img.naturalWidth;
-        const imageHeight = img.naturalHeight;
 
-        const scaledWidth = imageWidth * scale;
-        const scaledHeight = imageHeight * scale;
 
-        const minX = Math.min(0, containerWidth - scaledWidth);
+        const minX = containerWidth * (1 - scale) / scale;
         const maxX = 0;
-        const minY = Math.min(0, containerHeight - scaledHeight);
+        const minY = containerHeight * (1 - scale) / scale;
         const maxY = 0;
 
         tx = Math.min(Math.max(tx, minX), maxX);
@@ -111,8 +107,14 @@
     img.addEventListener('wheel', onWheel, { passive: false });
     img.addEventListener('pointerdown', pointerDown);
     img.addEventListener('pointermove', pointerMove);
+    img.addEventListener('pointerup', pointerUp);
     img.addEventListener('pointercancel', pointerUp);
-    document.addEventListener('pointerup', pointerUp); // robust final release
+    img.addEventListener('pointerleave', pointerUp);
 
-    apply(); // initialize transform on page load
+    img.addEventListener('load', function () {
+        scale = 1;
+        tx = 0;
+        ty = 0;
+        apply();
+    });
 })();
