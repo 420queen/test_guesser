@@ -16,11 +16,8 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        const imageWidth = img.naturalWidth;
-        const imageHeight = img.naturalHeight;
-
-        const scaledWidth = imageWidth * scale;
-        const scaledHeight = imageHeight * scale;
+        const scaledWidth = img.naturalWidth * scale;
+        const scaledHeight = img.naturalHeight * scale;
 
         const minX = Math.min(0, containerWidth - scaledWidth);
         const maxX = 0;
@@ -42,16 +39,20 @@
         const ox = e.clientX - rect.left;
         const oy = e.clientY - rect.top;
         const prev = scale;
+
         scale *= e.deltaY < 0 ? 1.1 : 0.9;
         scale = Math.min(Math.max(scale, minScale), maxScale);
+
         tx = ox - (ox - tx) * (scale / prev);
         ty = oy - (oy - ty) * (scale / prev);
+
         apply();
     }
 
     function pointerDown(e) {
         pointers.set(e.pointerId, e);
         img.classList.add('grabbing');
+
         if (pointers.size === 1) {
             start.x = e.clientX - tx;
             start.y = e.clientY - ty;
@@ -63,12 +64,14 @@
                 y: (a.clientY + b.clientY) / 2,
             };
         }
+
         img.setPointerCapture(e.pointerId);
     }
 
     function pointerMove(e) {
         if (!pointers.has(e.pointerId)) return;
         pointers.set(e.pointerId, e);
+
         if (pointers.size === 1) {
             e.preventDefault();
             tx = e.clientX - start.x;
@@ -79,18 +82,23 @@
             const [a, b] = Array.from(pointers.values());
             const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
             const factor = dist / start.dist;
+
             const mid = {
                 x: (a.clientX + b.clientX) / 2,
                 y: (a.clientY + b.clientY) / 2,
             };
+
             const prev = scale;
             scale = Math.min(Math.max(scale * factor, minScale), maxScale);
+
             tx += mid.x - start.mid.x;
             ty += mid.y - start.mid.y;
             tx = mid.x - (mid.x - tx) * (scale / prev);
             ty = mid.y - (mid.y - ty) * (scale / prev);
+
             start.dist = dist;
             start.mid = mid;
+
             apply();
         }
     }
@@ -99,6 +107,7 @@
         if (!pointers.has(e.pointerId)) return;
         pointers.delete(e.pointerId);
         img.releasePointerCapture(e.pointerId);
+
         if (pointers.size === 0) {
             img.classList.remove('grabbing');
         } else if (pointers.size === 1) {
@@ -111,14 +120,8 @@
     img.addEventListener('wheel', onWheel, { passive: false });
     img.addEventListener('pointerdown', pointerDown);
     img.addEventListener('pointermove', pointerMove);
-    img.addEventListener('pointerup', pointerUp);
     img.addEventListener('pointercancel', pointerUp);
-    img.addEventListener('pointerleave', pointerUp);
+    document.addEventListener('pointerup', pointerUp);
 
-    img.addEventListener('load', function () {
-        scale = 1;
-        tx = 0;
-        ty = 0;
-        apply();
-    });
+    apply(); // Initial transform
 })();
