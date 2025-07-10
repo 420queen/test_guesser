@@ -16,11 +16,19 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        const limitX = (containerWidth * (scale - 1)) / (2 * scale);
-        const limitY = (containerHeight * (scale - 1)) / (2 * scale);
+        const imageWidth = img.naturalWidth;
+        const imageHeight = img.naturalHeight;
 
-        tx = Math.min(Math.max(tx, -limitX), limitX);
-        ty = Math.min(Math.max(ty, -limitY), limitY);
+        const scaledWidth = imageWidth * scale;
+        const scaledHeight = imageHeight * scale;
+
+        const minX = Math.min(0, containerWidth - scaledWidth);
+        const maxX = 0;
+        const minY = Math.min(0, containerHeight - scaledHeight);
+        const maxY = 0;
+
+        tx = Math.min(Math.max(tx, minX), maxX);
+        ty = Math.min(Math.max(ty, minY), maxY);
     }
 
     function apply() {
