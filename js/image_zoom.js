@@ -16,15 +16,11 @@
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
+        const limitX = (containerWidth * (scale - 1)) / (2 * scale);
+        const limitY = (containerHeight * (scale - 1)) / (2 * scale);
 
-
-        const minX = containerWidth * (1 - scale) / scale;
-        const maxX = 0;
-        const minY = containerHeight * (1 - scale) / scale;
-        const maxY = 0;
-
-        tx = Math.min(Math.max(tx, minX), maxX);
-        ty = Math.min(Math.max(ty, minY), maxY);
+        tx = Math.min(Math.max(tx, -limitX), limitX);
+        ty = Math.min(Math.max(ty, -limitY), limitY);
     }
 
     function apply() {
