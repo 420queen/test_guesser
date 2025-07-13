@@ -97,17 +97,27 @@ button, .btn {
     background: rgb(238, 0, 0);
 }
 
-#image {
+#imageContainer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 1;
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
+    height: 100%;
+    overflow: hidden;
+}
+
+#image {
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  transform-origin: top left;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
 
 #image.grabbing {
@@ -270,7 +280,7 @@ select {
 
 @media (max-width: 767px) {
     /* show the image only in the top half of the viewport */
-    #image {
+    #imageContainer {
         height: 50vh;
     }
 
