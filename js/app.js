@@ -86,7 +86,7 @@ function startGame() {
 
             svinitialize();
             guess2.setLatLng({lat: -999, lng: -999});
-            mymap.setView([30, 10], 1);
+            mymap.setView([0, 0], 2);
 
         } else if (round >= 5){
             endGame();

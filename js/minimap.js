@@ -3,14 +3,13 @@
 //
 
 function mminitialize() {
-    mymap = L.map("miniMap");
+    mymap = L.map("miniMap").setView([0, 0], 2);
 
-    mymap.setView([30, 10], 1);
-
-    const pmLayer = new protomaps.PMTilesLayer({
-        url: 'offline_assets/planet_z8.pmtiles'
-    });
-    pmLayer.addTo(mymap);
+    pmtilesLayer({
+        url: 'offline_assets/planet_z8.pmtiles',
+        paint: PAINT_LIGHT,
+        attribution: "\u00a9 OpenStreetMap, \u00a9 Protomaps"
+    }).addTo(mymap);
 
     guess2 = L.marker([-999, -999]).addTo(mymap);
     guess2.setLatLng({lat: -999, lng: -999});
