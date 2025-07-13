@@ -97,15 +97,6 @@ button, .btn {
     background: rgb(238, 0, 0);
 }
 
-#imageContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
 #image {
     position: absolute;
   top: 0;
@@ -280,7 +271,7 @@ select {
 
 @media (max-width: 767px) {
     /* show the image only in the top half of the viewport */
-    #imageContainer {
+    #image {
         height: 50vh;
     }
 
