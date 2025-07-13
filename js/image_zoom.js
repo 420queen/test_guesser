@@ -1,9 +1,10 @@
 (function () {
     const img = document.getElementById('image');
-    if (!img) return;
+    const container = document.getElementById('imageContainer');
+    if (!img || !container) return;
 
     let scale = 1;
-    const minScale = 1;
+    let minScale = 1; // will be set on load
     const maxScale = 5;
     let tx = 0;
     let ty = 0;
@@ -12,7 +13,6 @@
     const start = {};
 
     function clamp() {
-        const container = img.parentElement;
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
@@ -28,9 +28,19 @@
         ty = Math.min(Math.max(ty, minY), maxY);
     }
 
-    function apply() {
+    function apply(animated = false) {
         clamp();
-        img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        if (animated) {
+            img.style.transition = 'transform 0.3s ease';
+            requestAnimationFrame(() => {
+                img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+            });
+            setTimeout(() => {
+                img.style.transition = '';
+            }, 300);
+        } else {
+            img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+        }
     }
 
     function onWheel(e) {
@@ -123,5 +133,25 @@
     img.addEventListener('pointercancel', pointerUp);
     document.addEventListener('pointerup', pointerUp);
 
-    apply(); // Initial transform
+    img.addEventListener('load', function () {
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const imageWidth = img.naturalWidth;
+        const imageHeight = img.naturalHeight;
+
+        const scaleX = containerWidth / imageWidth;
+        const scaleY = containerHeight / imageHeight;
+        scale = Math.max(scaleX, scaleY); // fill container (cover-fit)
+
+        minScale = scale; // prevent zooming out below initial size
+
+        const scaledWidth = imageWidth * scale;
+        const scaledHeight = imageHeight * scale;
+
+        tx = (containerWidth - scaledWidth) / 2;
+        ty = (containerHeight - scaledHeight) / 2;
+
+        apply(true); // animate on load
+    });
 })();
