@@ -2,7 +2,7 @@
 // Minimap
 //
 
-var customGuessIcon = L.icon({
+var myCustomIcon = L.icon({
     iconUrl: 'img/marker-icon.png',
     iconRetinaUrl: 'img/marker-icon-2x.png',
     shadowUrl: 'img/marker-shadow.png'
