@@ -198,7 +198,7 @@ select {
     height: 100%;
     background: rgba(0,0,0,0.5);
     display: none;
-    z-index: 1004;
+    z-index: 1003;
 }
 
 #roundEnd #roundMap {
@@ -278,7 +278,7 @@ select {
     background: #EFEFEF;
     text-align: center;
     display: none;
-    z-index: 1001;
+    z-index: 1005;
 }
 
 /* Change cursor when mousing over clickable layer */
