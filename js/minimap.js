@@ -12,12 +12,16 @@ function mminitialize() {
 
     // Initialize marker
     guess2 = L.marker([0, 0]).addTo(mymap);
-    guess2.setLatLng({ lat: 0, lng: 0 });
+    // no guess selected until the player clicks
+    window.guessLatLng = undefined;
+    guess2.setLatLng([0, 0]);
 
     // Click handler to update marker and global guess
     mymap.on("click", function(e) {
         console.log("Map clicked at", e.latlng); // for debugging
         guess2.setLatLng(e.latlng);
-        
+        // keep the coordinates for when the player submits their guess
+        window.guessLatLng = e.latlng;
+
     });
 }
