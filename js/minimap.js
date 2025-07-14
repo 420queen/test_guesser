@@ -2,6 +2,12 @@
 // Minimap
 //
 
+L.Icon.Default.mergeOptions({
+    iconUrl: 'img/marker-icon.png',
+    iconRetinaUrl: 'img/marker-icon-2x.png',
+    shadowUrl: 'https://unpkg.com/leaflet@1.0.3/dist/images/marker-shadow.png'
+});
+
 function mminitialize() {
     mymap = L.map("miniMap");
 
