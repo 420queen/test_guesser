@@ -2,7 +2,7 @@
 // Minimap
 //
 
-L.Icon.Default.mergeOptions({
+var customGuessIcon = L.icon({
     iconUrl: 'img/marker-icon.png',
     iconRetinaUrl: 'img/marker-icon-2x.png',
     shadowUrl: 'img/marker-shadow.png'
