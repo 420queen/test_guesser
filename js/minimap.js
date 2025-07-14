@@ -19,9 +19,14 @@ function mminitialize() {
     // Click handler to update marker and global guess
     mymap.on("click", function(e) {
         console.log("Map clicked at", e.latlng); // for debugging
-        guess2.setLatLng(e.latlng);
+        var coords = {
+            lat: parseFloat(e.latlng.lat),
+            lng: parseFloat(e.latlng.lng)
+        };
+
+        guess2.setLatLng([coords.lat, coords.lng]);
         // keep the coordinates for when the player submits their guess
-        window.guessLatLng = e.latlng;
+        window.guessLatLng = coords;
 
     });
 }
