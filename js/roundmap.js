@@ -22,17 +22,10 @@ function rminitialize() {
     guess = L.marker([0, 0], { icon: guessIcon, opacity: 0 }).addTo(roundmap);
     actual = L.marker([0, 0], { icon: actualIcon, opacity: 0 }).addTo(roundmap);
 
-    // Only place markers and fit view if both coordinates are defined
+    // Only place markers if both coordinates are defined.
+    // We'll fit the bounds once the result screen becomes visible
     if (window.guessLatLng && window.actualLatLng) {
-        guess.setLatLng(window.guessLatLng).setOpacity(1);
-        actual.setLatLng(window.actualLatLng).setOpacity(1);
-
-        roundmap.fitBounds(
-            L.latLngBounds(
-                guess.getLatLng(),
-                actual.getLatLng()
-            ),
-            { padding: [50, 50] }
-        );
+        guess.setLatLng([window.guessLatLng.lat, window.guessLatLng.lng]).setOpacity(1);
+        actual.setLatLng([window.actualLatLng.lat, window.actualLatLng.lng]).setOpacity(1);
     }
 }
