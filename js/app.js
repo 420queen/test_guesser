@@ -62,6 +62,8 @@ function startGame() {
 
             svinitialize();
             guess2.setLatLng({lat: -999, lng: -999});
+            // clear previous guess so player must click again
+            window.guessLatLng = undefined;
             mymap.setView([0, 0], 2);
 
         } else {
