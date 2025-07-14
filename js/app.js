@@ -4,7 +4,6 @@ function startGame() {
     var points = 0;
     var roundScore = 0;
     var totalScore = 0;
-    ranOut = false;
     var distance;
     var detailPic = '';
     var explainerText = '';
@@ -52,7 +51,7 @@ function startGame() {
 
         if (round < 5){
             round++;
-            roundScore = ranOut ? 0 : points;
+            roundScore = points;
             totalScore += roundScore;
 
             $('.round').html('Current Round: <b>'+round+'/5</b>');
@@ -88,12 +87,13 @@ function startGame() {
     }
 
     function doGuess(){
-        if (ranOut) return;
+        if (!window.guessLatLng || !('lat' in window.guessLatLng) || !window.actualLatLng || !('lat' in window.actualLatLng)) {
+    	console.warn("Missing guess or actual location");
+  	console.log("GuessLatLng:", window.guessLatLng);
+    	console.log("ActualLatLng:", window.actualLatLng);
+    	return;
+	}
 
-        if (!window.guessLatLng || !window.actualLatLng) {
-            console.warn("Missing guess or actual location");
-            return;
-        }
 
         distance = Math.ceil(
             calcDistance(
@@ -122,9 +122,9 @@ function startGame() {
 
     function endRound(){
         var content = '';
-        if (typeof distance === 'undefined' || ranOut == true) {
+        if (typeof distance === 'undefined') {
             content = '<div class="slider">'+
-                      '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
+                      '<div id="resultContent" class="pane"><p>You didn\'t make a guess!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
                       '<div id="detailContent" class="pane"><h2>'+window.locName+'</h2><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-secondary backBtn" type="button">Retour</button><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
                       '</div>';
             points = 0;
@@ -151,8 +151,6 @@ function startGame() {
 
         $('#overlay').fadeIn();
         $('#scoreBoard').hide();
-
-        ranOut = false;
     }
 
     function endGame(){
@@ -177,7 +175,7 @@ function startGame() {
         document.getElementById('image').src = place.image;
         window.actualLatLng = {
             lat: place.lat,
-            lng: place.lon // Convert "lon" from JSON to "lng"
+            lng: place.lng
         };
         window.locName = place.label;
         detailPic = place["detail-picture"] || '';
