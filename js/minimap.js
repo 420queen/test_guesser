@@ -18,7 +18,7 @@ function mminitialize() {
         maxZoom: 18
     }).addTo(mymap);
 
-    guess2 = L.marker([-999, -999], { icon: customGuessIcon }).addTo(mymap);
+    guess2 = L.marker([-999, -999], { icon: myCustomIcon }).addTo(mymap);
     guess2.setLatLng({lat: -999, lng: -999});
 
     mymap.on("click", function(e) {
