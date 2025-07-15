@@ -58,7 +58,7 @@ function startGame() {
             $('.roundScore').html('Score précédent: <b>'+roundScore+'</b>');
             $('.totalScore').html('Score total: <b>'+totalScore+'</b>');
 
-            document.getElementById('image').src = "";
+            $('#image').attr('src', '');
 
             svinitialize();
             guess2.setLatLng({lat: -999, lng: -999});
@@ -90,12 +90,11 @@ function startGame() {
 
     function doGuess(){
         if (!window.guessLatLng || !('lat' in window.guessLatLng) || !window.actualLatLng || !('lat' in window.actualLatLng)) {
-    	console.warn("Missing guess or actual location");
-  	console.log("GuessLatLng:", window.guessLatLng);
-    	console.log("ActualLatLng:", window.actualLatLng);
-    	return;
-	}
-
+            console.warn("Missing guess or actual location");
+            console.log("GuessLatLng:", window.guessLatLng);
+            console.log("ActualLatLng:", window.actualLatLng);
+            return;
+        }
 
         distance = Math.ceil(
             calcDistance(
@@ -133,7 +132,7 @@ function startGame() {
         } else {
             content = '<div class="slider">' +
   '<div id="resultContent" class="pane">' +
-    '<p>Ton estimation est à<br/>'+
+    '<p>Ton estimation est à<br/>'+ 
     '<h1><strong><span class="highlight">' + distance + ' km</span></strong></h1></p>' +
     '<p>du lieu recherché :</p>' +
     '<h2>' + window.locName + '</h2>' +
@@ -175,16 +174,16 @@ function startGame() {
         roundScore = points;
         totalScore += points;
 
-        $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
+        $('#miniMap, #guessButton, #scoreBoard').hide();
         $('#endGame').html(
- 	 '<h1>Félicitations !</h1>' +
- 	 '<h2>Voici ton score final:</h2>' +
- 	 '<h1><span class="highlight">' + totalScore + ' points</span></h1>' +
- 	 '<br/>' +
- 	 '<button class="btn btn-large btn-success playAgain" type="button">Nouvelle partie ?</button>'
-	);
+         '<h1>Félicitations !</h1>' +
+         '<h2>Voici ton score final:</h2>' +
+         '<h1><span class="highlight">' + totalScore + ' points</span></h1>' +
+         '<br/>' +
+         '<button class="btn btn-large btn-success playAgain" type="button">Nouvelle partie ?</button>'
+    );
 
-	$('#endGame').fadeIn(500); 
+    $('#endGame').fadeIn(500); 
 
         window.finished = true;
     }
@@ -197,7 +196,7 @@ function startGame() {
 
         var place = locationsPool.shift();
 
-        document.getElementById('image').src = place.image;
+        $('#image').attr('src', place.image);
         window.actualLatLng = {
             lat: place.lat,
             lng: place.lng
@@ -233,6 +232,4 @@ $(document).ready(function(){
         $('#overlay').fadeOut(500);
         startGame(); // Start the game only after instructions
     });
-});
-
 });
