@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wikidata Guessr</title>
-        <link rel='stylesheet' href='css/bootstrap.css' />
-        <link rel='stylesheet' href='css/style.css' />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ==" crossorigin=""/>
-        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
-        <script type='text/javascript' src='js/rnd.js'></script>
-        <script type='text/javascript' src='js/minimap.js'></script>
-        <script type='text/javascript' src='js/roundmap.js'></script>
-        <script type='text/javascript' src='js/app.js'></script>
-        <script type='text/javascript' src='js/image_zoom.js' defer></script>
-    </head>
-    <body>
-        <div id="welcomeScreen">
-            <img src="img/screen.svg" alt="Logo" />
-            <button id="startButton" class="btn btn-primary">Start Game</button>
+<html lang="fr">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MSF GUESSR</title>
+
+    <!-- Stylesheets -->
+    <link rel='stylesheet' href='css/bootstrap.css' />
+    <link rel='stylesheet' href='css/style.css' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha512-o8Xt+rn1FzLxZz5JMXZkH0eCzNhgUHTBBmki8S+XPhlsTVUkFf99xMAtn/NuwN5lXc4YCDg8z5Mj7LQpxGXmQw==" crossorigin="" />
+
+    <!-- JavaScript libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha512-f5wJdy3rZhrPZg28W5c9q62pAhtk0OHv9ZVd+9f6kT8bGL5MkWh1MfZAZbE7blEnN+G5RbRSN+fTRJ1i8wTsyg==" crossorigin=""></script>
+    <script src="https://unpkg.com/protomaps-leaflet"></script>
+
+    <!-- App Scripts -->
+    <script src="js/rnd.js"></script>
+    <script src="js/minimap.js"></script>
+    <script src="js/roundmap.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/image_zoom.js" defer></script>
+</head>
+<body>
+    <div id="welcomeScreen">
+        <img src="img/screen.svg" alt="Logo" />
+        <button id="startButton" class="btn btn-primary">Commencer</button>
+    </div>
+
+    <div id="content">
+        <div id="overlay"></div>
+        <div id="roundEnd"></div>
+        <div id="endGame"></div>
+
+        <!-- 📌 Popup instructions -->
+        <div id="instructionsPopup">
+            <p>Clique sur la carte pour deviner où se trouve le projet MSF.<br>Plus tu es proche, plus tu gagnes de points !</p>
+            <button id="instructionStart" class="btn btn-primary">C'est parti !</button>
         </div>
-        <div id='content'>
-            <div id="overlay"></div>
-            <div id="roundEnd"></div>
-            <div id="endGame"></div>
-            <div id="instructionsPopup">
-                <p>Clique sur la carte pour deviner où se trouve le projet MSF. Plus tu es proche, plus tu gagnes de points !</p>
-                <button id="instructionStart" class="btn btn-primary">C'est parti !</button>
-            </div>
-            <div id='scoreBoard'>
-                <span class='round'>Current Round: <b>1/5</b></span><br/>
-                <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
-                <span class='totalScore'>Total Score: <b>0</b></span><br />
-                <span><a href="https://github.com/blinry/wikidata-guessr">View project on GitHub</a></span>
-            </div>
-            <div id='miniMapWrapper'>
-                <div id='miniMap'></div>
-                <div id='guessButton' class="btn btn-large btn-danger">Make Your Guess</div>
-            </div>
-            <div id="imageContainer">
-                <img id='image' src='' />
-            </div>
+
+        <div id="scoreBoard">
+            <span class='round'>Manche en cours: <b>1/5</b></span><br/>
+            <span class='roundScore'>Score précédent: <b>0</b></span><br/>
+            <span class='totalScore'>Score total: <b>0</b></span>
         </div>
-    </body>
+
+        <div id='miniMapWrapper'>
+            <div id='miniMap'></div>
+            <div id='guessButton' class="btn btn-large btn-danger">Valider la localisation</div>
+        </div>
+
+        <div id="imageContainer">
+            <img id='image' src='' />
+        </div>
+    </div>
+</body>
 </html>
