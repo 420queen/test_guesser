@@ -221,7 +221,18 @@ function startGame() {
 $(document).ready(function(){
     $('#startButton').on('click', function(){
         $('#welcomeScreen').fadeOut(500, function(){
-            startGame();
+            setTimeout(function(){
+                $('#overlay').fadeIn();
+                $('#instructionsPopup').fadeIn();
+            }, 800);
         });
     });
+
+    $('#instructionStart').on('click', function(){
+        $('#instructionsPopup').fadeOut(500);
+        $('#overlay').fadeOut(500);
+        startGame(); // Start the game only after instructions
+    });
+});
+
 });
