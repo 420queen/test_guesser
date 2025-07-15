@@ -141,7 +141,7 @@ function startGame() {
             endRound();
 
         } else {
-            // They ran out
+            
         }
 
     };
@@ -152,8 +152,8 @@ function startGame() {
         if(typeof distance === 'undefined' || ranOut == true){
             $('#roundEnd').html(
                 '<div class="slider">'+
-                    '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continue</button></p></div>'+
-                    '<div id="detailContent" class="pane"><h2>'+window.locName+'</h2><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-secondary backBtn" type="button">Retour</button><button class="btn btn-primary nextBtn" type="button">Next Round</button></div>'+
+                    '<div id="resultContent" class="pane"><p>Dang nabbit! You took too long!.<br/> You didn\'t score any points this round!<br/><br/><button class="btn btn-primary detailBtn" type="button">Continuer</button></p></div>'+
+                    '<div id="detailContent" class="pane"><h2>'+window.locName+'</h2><img src="'+detailPic+'" class="detailPic"/><p>'+explainerText+'</p><button class="btn btn-secondary backBtn" type="button">Retour</button><button class="btn btn-primary nextBtn" type="button">Prochaine manche</button></div>'+
                 '</div>'
             );
             rminitialize();
