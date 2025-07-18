@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
         <meta charset='utf-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Wikidata Guessr</title>
@@ -15,6 +15,7 @@
         <script type='text/javascript' src='js/app.js'></script>
         <script type='text/javascript' src='js/image_zoom.js' defer></script>
     </head>
+
     <body>
         <div id="welcomeScreen">
             <img src="img/screen.svg" alt="Logo" />
@@ -24,6 +25,10 @@
             <div id="overlay"></div>
             <div id="roundEnd"></div>
             <div id="endGame"></div>
+            <div id="instructionsPopup">
+                <p>Clique sur la carte pour deviner où se trouve le projet MSF. Plus tu es proche, plus tu gagnes de points !</p>
+                <button id="instructionStart" class="btn btn-primary">C'est parti !</button>
+            </div>
             <div id='scoreBoard'>
                 <span class='round'>Current Round: <b>1/5</b></span><br/>
                 <span class='roundScore'>Last Round Score: <b>0</b></span><br/>

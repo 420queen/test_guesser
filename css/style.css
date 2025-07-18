@@ -198,7 +198,7 @@ select {
     height: 100%;
     background: rgba(0,0,0,0.5);
     display: none;
-    z-index: 1004;
+    z-index: 1003;
 }
 
 #roundEnd #roundMap {
@@ -268,6 +268,19 @@ select {
     z-index: 1000;
 }
 
+#instructionsPopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    margin: -190px 0 0 -240px;
+    padding: 20px;
+    background: #EFEFEF;
+    text-align: center;
+    display: none;
+    z-index: 1005;
+}
+
 /* Change cursor when mousing over clickable layer */
 .leaflet-clickable {
   cursor: default !important;
@@ -309,7 +322,8 @@ select {
 
     /* make the round result and final result boxes fit the viewport */
     #roundEnd,
-    #endGame {
+    #endGame,
+    #instructionsPopup {
         width: 90%;
         left: 50%;
         right: auto;
@@ -318,6 +332,12 @@ select {
     }
 
     #endGame {
+        top: 50%;
+        margin-top: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    #instructionsPopup {
         top: 50%;
         margin-top: 0;
         transform: translate(-50%, -50%);

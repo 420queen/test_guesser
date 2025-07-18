@@ -12,12 +12,14 @@ function rminitialize() {
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
-        iconAnchor: [45, 90]
+        iconSize: [60, 60],        // Nouvelle taille
+        iconAnchor: [30, 60]       // Centre bas
     });
 
     var actualIcon = L.icon({
         iconUrl: "img/actual.png",
-        iconAnchor: [45, 90]
+        iconSize: [60, 60],        // Nouvelle taille
+        iconAnchor: [30, 60]       // Centre bas
     });
 
     guess = L.marker([-999, -999], {
