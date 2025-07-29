@@ -5,10 +5,16 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-        maxZoom: 18
-    }).addTo(roundmap);
+    if (typeof protomaps !== 'undefined' && protomaps.pmtilesLayer) {
+        protomaps.pmtilesLayer('http://localhost:8080/planet_z8.pmtiles', {
+            maxZoom: 8
+        }).addTo(roundmap);
+    } else {
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 8
+        }).addTo(roundmap);
+    }
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
