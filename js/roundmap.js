@@ -5,10 +5,10 @@
 function rminitialize() {
     roundmap = L.map("roundMap").setView([30, 10], 1);
 
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-        maxZoom: 18
-    }).addTo(roundmap);
+    const pmLayer = new protomaps.PMTilesLayer({
+        url: 'offline_assets/planet_z8.pmtiles'
+    });
+    pmLayer.addTo(roundmap);
 
     var guessIcon = L.icon({
         iconUrl: "img/guess.png",
